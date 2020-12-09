@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.2] - 2020-12-08 MH
 ### Added
 - webpack.mix.js
+- helpers.php
+- setup-composer.php
 
 ## [0.0.1] - 2020-10-28 MH
 ### Added
