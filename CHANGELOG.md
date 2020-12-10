@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2020-12-10 MH
+### Added
+- package.json
+
 ## [0.0.3] - 2020-12-09 MH
 ### Added
 - components.tar.gz
