@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.4] - 2020-12-10 MH
 ### Added
 - package.json
+- site.js
+- Kernel.php
+- cas.env
+- resources/*
 
 ## [0.0.3] - 2020-12-09 MH
 ### Added

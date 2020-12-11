@@ -1,0 +1,16 @@
+/*
+ * _components.scss
+ *
+ * @version 0.1.0 2019-09-26 MH
+ * @since 0.1.0 */
+
+/* for student multi select */
+.student-select {
+	width:100%;
+	display: block;
+	min-height: 205px;
+	max-height: 205px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	overflow-x: visible;
+}

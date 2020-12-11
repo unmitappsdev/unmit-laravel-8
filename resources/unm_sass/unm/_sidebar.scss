@@ -1,0 +1,74 @@
+/*
+ * _sidebar.scss
+ *
+ * @version 0.1.0 2019-09-26 MH
+ * @since 0.1.0 */
+
+/* Sidebar */
+
+#sidebar-wrapper {
+  z-index: 1;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  overflow-y: hidden;
+  background: $white;
+  color: $unmred;
+}
+
+/* Always take up entire screen */
+
+#page-content-wrapper {
+  width: 100%;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.tree {
+  margin-left: 20px;
+}
+
+/* Change with of sidebar from 0 to 200px */
+#wrapper.menuDisplayed {
+  #sidebar-wrapper {
+    width: 200px;
+  }
+  #page-content-wrapper {
+    padding-left: 115px;
+  }
+}
+
+
+.h3-indent {
+  text-indent: 15px;
+  color: $darkgrey;
+}
+
+.a-tree {
+  color: #636b6f;
+  &:hover {
+    color: $darkgrey;
+  }
+}
+
+/* Sidebar styling - the entire ul list */
+
+.sidebar-nav {
+  padding: 0;
+  list-style: none;
+  li {
+    text-indent: 40px;
+    line-height: 40px;
+    a {
+      display: block;
+      text-decoration: none;
+      color: $grey;
+      &:hover {
+        background: #E3D9DF;
+      }
+    }
+  }
+}
+
+/* end sidebar */
