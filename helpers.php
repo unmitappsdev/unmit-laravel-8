@@ -72,3 +72,9 @@ HTML;
 		return $retstr;
     }
 }
+
+if (!function_exists('getBaseDomain')) {
+	function basedomain() {
+		return env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
+	}
+}

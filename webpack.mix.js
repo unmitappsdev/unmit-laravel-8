@@ -38,7 +38,7 @@ var cfiles = fs.readdirSync(cpath).forEach(file => {
 mix.copy('resources/images/*','public/img');
 
 // copy over css resources
-// mix.copy('resources/css/*','public/css');
+mix.copy('resources/css/*','public/css');
 
 // copy over webfonts for FA
 mix.copy('resources/webfonts/*','public/webfonts');
