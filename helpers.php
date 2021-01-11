@@ -2,9 +2,13 @@
 
 if (!function_exists('get_name')) {
 
-    function get_name($identifier,$classname,$nametype) {
+	function get_name($identifier,$classname,$nametype) {
+		$version = app()->version();
 
-        $classname = "App\\$classname";
+		if (version_compare($version,'8.0.0') < 0)
+			$classname = "App\\$classname";
+		else
+			$classname = "App\\Models\\$classname";
 
         if (!class_exists($classname))
             return $identifier;

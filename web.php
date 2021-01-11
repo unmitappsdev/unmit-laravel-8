@@ -35,7 +35,7 @@ Route::middleware(['cas.auth'])->group(function() {
 	// main.logout
 	Route::get('logout',function() {
 		session()->forget('auth.account_type');
-        return cas()->logout(null,route('main.home'));
+		return cas()->logout(null,route('main.home'));
 	})->name('main.logout');
 });
 

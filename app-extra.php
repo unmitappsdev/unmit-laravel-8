@@ -31,7 +31,7 @@ return [
 	],
 
 	'browser' => [
-		'default-page-title' => config('APP_NAME','Base application'),
+		'default-page-title' => config('app.name','Base application'),
 		'main-title' => 'Home'
 	]
 ];

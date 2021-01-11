@@ -20,7 +20,6 @@ Layout page for using ReactJS components
 
     <meta name="description" content="UNM IT Application group is here to provide the application development needs of the university."/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--<meta content="suDeBu3cQ5JEfYn92UdyZqkDPVCRI3QFK4dbV1tzUNk" name="google-site-verification"/>--}}
     <link href="//webcore.unm.edu/v1/images/unm.ico" rel="shortcut icon"/>
 	<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7254094/6839152/css/fonts.css"/>
     <link href="//webcore.unm.edu/v2/css/unm-styles.min.css" rel="stylesheet"/>
@@ -120,8 +119,8 @@ Layout page for using ReactJS components
       <!-- start app-header -->
       <div id="app-header" class="d-flex justify-content-end">
           <div class="container">
-              <a href="https://core.unm.edu">
-				  <h1>Chart of Accounts Requests</h1>
+              <a href="{{ config("app.url","/") }}">
+				  <h1>{{ config("app.name",'UNM IT Custom App') }}</h1>
               </a>
           </div>
       </div>
@@ -156,6 +155,7 @@ Layout page for using ReactJS components
                   <a href="{{ route('main.home') }}" title="Home"><i class="fas fa-home"></i> Home</a>
                 </li>
                 @if (cas()->isAuthenticated())
+				{{--
                 @can('request')
                 <li>
                   <a href="{{ route('request.main') }}" title="Requests"><i class="fas fa-poll-h"></i> Requests</a>
@@ -173,6 +173,7 @@ Layout page for using ReactJS components
                   <a href="{{ route('admin.main') }}" title="Admin Actions"><i class="fas fa-user-cog"></i> Admin Actions</a>
                 </li>
                 @endcan
+				--}}
                 @endif
               </ul>
             </nav>

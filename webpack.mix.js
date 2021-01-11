@@ -1,29 +1,34 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
- | file for the application as well as bundling up all the JS files.
- |
+/**
+ * @fileoverview Mix asset management
+ *
+ * Mix provides a clean, fluent API for defining some Webpack build steps
+ * for your Laravel application. By default, we are compiling the Sass
+ * file for the application as well as bundling up all the JS files.
+ *
+ * This file follows the style guide as found
+ * on https://google.github.io/styleguide/jsguide.html (as of 2019-09-25)
  */
 
 mix.webpackConfig({
-	devtool: "source-map"
+  devtool: "source-map"
 });
 
+// compile javascript & sass resources
 mix.js('resources/js/app.js', 'public/js')
-	.js('resources/js/site.js','public/js')
-	.sass('resources/unm_sass/app.scss','public/css')
-	.sass('resources/unm_sass/unm/unm.scss','public/css');
+   .js('resources/js/site.js', 'public/js')
+   .sass('resources/unm_sass/app.scss','public/css')
+   .sass('resources/unm_sass/unm/unm.scss','public/css');
 
-
-mix.postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+//  .browserSync({
+//      files: [
+//          'app/**/*',
+//          'public/**/*',
+//          'resources/**/*',
+//          'routes/**/*'
+//      ]
+//  });
 
 // compile individual React component resources
 const cpath = 'resources/js/components/';

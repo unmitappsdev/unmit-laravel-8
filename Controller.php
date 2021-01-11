@@ -21,11 +21,11 @@ class Controller extends BaseController
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 	public $basedomain;
-
+/*
 	public function __construct() {
 		$this->basedomain = env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
 	}
-
+ */
     public function getProcessedFormAttributeVars($content,$params = null)
     {
 		$prefix = '%route:';
@@ -122,6 +122,12 @@ class Controller extends BaseController
 			$yaml_content = file_get_contents($fn);
 			$yaml_content = $this->getProcessedTableAttributeVars($yaml_content);
 			$config_vars = Yaml::parse($yaml_content);
+		}
+
+		foreach ($config_vars['columnData'] as $k => $v) {
+			if (is_null($v)) {
+				$config_vars['columnData'][$k] = [ 'label' => $model->dataIdentifiers[$k]['desc_name'] ?? $k ];
+			}
 		}
 
 		return $config_vars;

@@ -99,3 +99,9 @@ caption {
     position : absolute;
     bottom : -20px;
 }
+
+.vmiddle {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
