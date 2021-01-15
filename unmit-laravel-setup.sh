@@ -17,25 +17,25 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
-wget https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js -O -P ./
-wget https://raw.githubusercontent.com/hanovate/unmit/main/package.json -O -P ./
-wget https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php -O -P ./app
-wget https://raw.githubusercontent.com/hanovate/unmit/main/OracleModel.php -O -P ./app
-wget https://raw.githubusercontent.com/hanovate/unmit/main/Kernel.php -O -P ./app/Http
-wget https://raw.githubusercontent.com/hanovate/unmit/main/Controller.php -O -P ./app/Http/Controllers
-wget https://raw.githubusercontent.com/hanovate/unmit/main/web.php -O -P ./routes
-wget https://raw.githubusercontent.com/hanovate/unmit/main/common.php -O -P ./routes
-wget https://raw.githubusercontent.com/hanovate/unmit/main/app-extra.php -O -P ./config
-wget https://raw.githubusercontent.com/hanovate/unmit/main/components.tar.gz -O -P ./resources/js
+wget -O webpack.mix.js -P ./ https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js
+wget -O package.json -P ./ https://raw.githubusercontent.com/hanovate/unmit/main/package.json
+wget -O helpers.php -P ./app https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php
+wget -O OracleModel.php -P ./app https://raw.githubusercontent.com/hanovate/unmit/main/OracleModel.php
+wget -O Kernel.php -P ./app/Http https://raw.githubusercontent.com/hanovate/unmit/main/Kernel.php
+wget -O Controller.php -P ./app/Http/Controllers https://raw.githubusercontent.com/hanovate/unmit/main/Controller.php
+wget -O web.php -P ./routes https://raw.githubusercontent.com/hanovate/unmit/main/web.php
+wget -O common.php -P ./routes https://raw.githubusercontent.com/hanovate/unmit/main/common.php
+wget -O app-extra.php -P ./config https://raw.githubusercontent.com/hanovate/unmit/main/app-extra.php
+wget -O components.tar.gz -P ./resources/js https://raw.githubusercontent.com/hanovate/unmit/main/components.tar.gz
 mkdir -p app/Auth/Guards
 wget https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php -O -P ./app/Auth/Guards
 mkdir -p app/Http/Controllers/Api
-wget https://raw.githubusercontent.com/hanovate/unmit/main/BaseController.php -O -P ./app/Http/Controllers/Api/
-wget https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
+wget -O BaseController.php -P ./app/Http/Controllers/Api/ https://raw.githubusercontent.com/hanovate/unmit/main/BaseController.php
+wget -O cas.env -P ./ https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
 cat cas.env >> .env
 rm cas.env
 # update composer.json
-wget https://raw.githubusercontent.com/hanovate/unmit/main/setup-composer.php -O -P ./
+wget -O setup-composer.php -P ./ https://raw.githubusercontent.com/hanovate/unmit/main/setup-composer.php
 cp -p composer.json composer.json.dist
 php setup-composer.php
 (cat composer.json | python3 -m json.tool) > composer.tmp
