@@ -1,6 +1,6 @@
 #!/bin/bash
 PHP_VERSION=$(php -v | head -n 1 | cut -d ' ' -f 2 | cut -f1-2 -d'.')
-REQUIRED_PHP_VERSION="7.4"
+REQUIRED_PHP_VERSION="7.3"
 if [ "$(printf '%s\n' "$REQUIRED_PHP_VERSION" "$PHP_VERSION" | sort -V | head -n1)" != "$REQUIRED_PHP_VERSION" ]; then
 	echo PHP version must be greater than $REQUIRED_PHP_VERSION. The current version is $(php -v | head -n 1 | cut -d ' ' -f 2).
 	exit 1
@@ -11,6 +11,10 @@ if ! php -m | grep -q "runkit7"; then
 fi
 if ! php -m | grep -q "oci8"; then
 	echo PHP extension oci8 must be installed before you can continue
+	exit 1
+fi
+if ! php artisan --version | grep -q "Laravel Framework 8"; then
+	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
 wget https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js -P ./
