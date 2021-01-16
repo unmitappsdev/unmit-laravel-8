@@ -17,6 +17,14 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
+composer require phpoffice/phpspreadsheet
+composer require elibyy/tcpdf-laravel
+composer require symfony/yaml
+composer require laravel/ui
+./artisan ui react
+composer require laracasts/utilities
+composer require hanovate/cas
+./artisan vendor:publish --tag=cas
 wget -O ./webpack.mix.js https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js
 wget -O ./package.json https://raw.githubusercontent.com/hanovate/unmit/main/package.json
 wget -O ./app/helpers.php https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php
@@ -35,13 +43,6 @@ wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
 cat cas.env >> .env
 rm cas.env
 # update composer.json
-composer require phpoffice/phpspreadsheet
-composer require elibyy/tcpdf-laravel
-composer require symfony/yaml
-composer require laravel/ui
-composer require laracasts/utilities
-composer require hanovate/cas
-./artisan vendor:publish --tag=cas
 wget -O ./setup-composer.php https://raw.githubusercontent.com/hanovate/unmit/main/setup-composer.php
 cp -p composer.json composer.json.dist
 php setup-composer.php
