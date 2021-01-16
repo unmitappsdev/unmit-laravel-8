@@ -35,13 +35,6 @@ wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
 cat cas.env >> .env
 rm cas.env
 # update composer.json
-wget -O ./setup-composer.php https://raw.githubusercontent.com/hanovate/unmit/main/setup-composer.php
-cp -p composer.json composer.json.dist
-php setup-composer.php
-(cat composer.json | python3 -m json.tool) > composer.tmp
-mv composer.tmp composer.json
-composer require yajra/laravel-oci8:^8
-./artisan vendor:publish --tag=oracle
 composer require phpoffice/phpspreadsheet
 composer require elibyy/tcpdf-laravel
 composer require symfony/yaml
@@ -49,6 +42,13 @@ composer require laravel/ui
 composer require laracasts/utilities
 composer require hanovate/cas
 ./artisan vendor:publish --tag=cas
+wget -O ./setup-composer.php https://raw.githubusercontent.com/hanovate/unmit/main/setup-composer.php
+cp -p composer.json composer.json.dist
+php setup-composer.php
+(cat composer.json | python3 -m json.tool) > composer.tmp
+mv composer.tmp composer.json
+composer require yajra/laravel-oci8:^8
+./artisan vendor:publish --tag=oracle
 composer update
 cd resources/js
 tar -xzvf components.tar.gz
