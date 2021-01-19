@@ -17,6 +17,23 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
+# set up folder permissions
+WEBSVCUSER=$(ps aux | egrep -e '(bin/httpd|nginx|apache)' | grep -v -e $USER | grep -v -e 'root' | head -n 1 | cut -d " " -f1)
+if git rev-parse --show-cdup | grep -q '\.'; then
+	cd $(git rev-parse --show-cdup)
+fi
+sudo chmod u+x ./artisan
+sudo chown -R $WEBSVCUSER:$WEBSVCUSER storage
+sudo chmod -R 0664 storage
+sudo find storage -type d -exec chmod 2775 '{}' \;
+cd bootstrap
+sudo chown -R $WEBSVCUSER:$WEBSVCUSER cache
+sudo chmod -R 0664 cache
+sudo find cache -type d -exec chmod 2775 '{}' \;
+cd ..
+# git init
+git init
+# install Laravel packages
 composer require phpoffice/phpspreadsheet
 composer require elibyy/tcpdf-laravel
 composer require symfony/yaml
@@ -56,9 +73,9 @@ tar -xzvf components.tar.gz
 rm components.tar.gz
 cd ../..
 composer dump-autoload
-./artisan ui:auth
-npm install
-npm install react
-npm install react-dom
-npm install react-hooks-async
-npm run dev
+# ./artisan ui:auth
+# npm install
+# npm install react
+# npm install react-dom
+# npm install react-hooks-async
+# npm run dev
