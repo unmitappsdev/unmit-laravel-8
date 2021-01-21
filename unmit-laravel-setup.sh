@@ -46,6 +46,7 @@ wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
 wget -O ./resources/views/home.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/home.blade.php
 mkdir -p resources/views/layouts
 wget -O ./resources/views/layouts/base.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/layouts/base.blade.php
+wget -O ./public/mix-manifest.json https://raw.githubusercontent.com/hanovate/unmit/main/mix-manifest.json
 cat cas.env >> .env
 rm cas.env
 # update composer.json
