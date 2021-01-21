@@ -67,16 +67,16 @@ composer dump-autoload
 # npm run dev
 #
 # set up folder permissions
-WEBSVCUSER=$(ps aux | egrep -e '(bin/httpd|nginx|apache)' | grep -v -e $USER | grep -v -e 'root' | head -n 1 | cut -d " " -f1)
-if git rev-parse --show-cdup | grep -q '\.'; then
-	cd $(git rev-parse --show-cdup)
-fi
-sudo chmod u+x ./artisan
-sudo chown -R $WEBSVCUSER:$WEBSVCUSER storage
-sudo chmod -R 0664 storage
-sudo find storage -type d -exec chmod 2775 '{}' \;
-cd bootstrap
-sudo chown -R $WEBSVCUSER:$WEBSVCUSER cache
-sudo chmod -R 0664 cache
-sudo find cache -type d -exec chmod 2775 '{}' \;
-cd ..
+# WEBSVCUSER=$(ps aux | egrep -e '(bin/httpd|nginx|apache)' | grep -v -e $USER | grep -v -e 'root' | head -n 1 | cut -d " " -f1)
+# if git rev-parse --show-cdup | grep -q '\.'; then
+# 	cd $(git rev-parse --show-cdup)
+# fi
+# sudo chmod u+x ./artisan
+# sudo chown -R $WEBSVCUSER:$WEBSVCUSER storage
+# sudo chmod -R 0664 storage
+# sudo find storage -type d -exec chmod 2775 '{}' \;
+# cd bootstrap
+# sudo chown -R $WEBSVCUSER:$WEBSVCUSER cache
+# sudo chmod -R 0664 cache
+# sudo find cache -type d -exec chmod 2775 '{}' \;
+# cd ..
