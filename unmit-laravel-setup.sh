@@ -43,6 +43,9 @@ wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovat
 mkdir -p app/Http/Controllers/Api
 wget -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/hanovate/unmit/main/BaseController.php
 wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
+wget -O ./resources/views/home.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/home.blade.php
+mkdir -p resources/views/layouts
+wget -O ./resources/views/layouts/base.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/layouts/base.blade.php
 cat cas.env >> .env
 rm cas.env
 # update composer.json
