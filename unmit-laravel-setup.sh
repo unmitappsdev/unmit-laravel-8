@@ -37,6 +37,8 @@ wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/
 wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/web.php
 wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/common.php
 wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/app-extra.php
+rm -f ./config/oracle.php
+wget -O ./config/oracle.php https://raw.githubusercontent.com/hanovate/unmit/main/oracle.php
 mkdir -p app/Auth/Guards
 wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
