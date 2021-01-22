@@ -37,19 +37,11 @@ wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/
 wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/web.php
 wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/common.php
 wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/app-extra.php
-wget -O ./resources/js/components.tar.gz https://raw.githubusercontent.com/hanovate/unmit/main/components.tar.gz
 mkdir -p app/Auth/Guards
 wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
 wget -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/hanovate/unmit/main/BaseController.php
 wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
-wget -O ./resources/views/home.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/home.blade.php
-mkdir -p resources/views/layouts
-wget -O ./resources/views/layouts/base.blade.php https://raw.githubusercontent.com/hanovate/unmit/main/resources/views/layouts/base.blade.php
-wget -O ./public/mix-manifest.json https://raw.githubusercontent.com/hanovate/unmit/main/mix-manifest.json
-wget -O ./public/js/site.js https://raw.githubusercontent.com/hanovate/unmit/main/site.js
-wget -O ./public/css/site-styles.css https://raw.githubusercontent.com/hanovate/unmit/main/resources/css/site-styles.css
-wget -O ./resources/css/site-styles.css https://raw.githubusercontent.com/hanovate/unmit/main/resources/css/site-styles.css
 wget -O ./resources.tar.gz https://raw.githubusercontent.com/hanovate/unmit/main/resources.tar.gz
 tar -xzvf resources.tar.gz
 rm resources.tar.gz
@@ -64,10 +56,6 @@ mv composer.tmp composer.json
 composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle
 composer update
-cd resources/js
-tar -xzvf components.tar.gz
-rm components.tar.gz
-cd ../..
 composer dump-autoload
 # ./artisan ui:auth
 # npm install
