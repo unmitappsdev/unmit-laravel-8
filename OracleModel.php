@@ -2,7 +2,7 @@
 namespace App;
 
 use Yajra\Oci8\Eloquent\OracleEloquent as Model;
-use Yaml;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class: OracleModel
