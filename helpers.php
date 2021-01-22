@@ -5,13 +5,17 @@ if (!function_exists('get_name')) {
 	function get_name($identifier,$classname,$nametype) {
 		$version = app()->version();
 
-		if (version_compare($version,'8.0.0') < 0)
-			$classname = "App\\$classname";
-		else
-			$classname = "App\\Models\\$classname";
+		$classname_alt = "App\\$classname";
+		$classname_8 = "App\\Models\\$classname";
 
-        if (!class_exists($classname))
-            return $identifier;
+        if (!class_exists($classname_alt) && !class_exists($classname_8))
+			return $identifier;
+
+		if (class_exists($classname_alt))
+			$classname = $classname_alt;
+
+		if (class_exists($classname_8))
+			$classname = $classname_8;
 
         $obj = new $classname;
 
