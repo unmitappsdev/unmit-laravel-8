@@ -5,6 +5,10 @@ if [ "$(printf '%s\n' "$REQUIRED_PHP_VERSION" "$PHP_VERSION" | sort -V | head -n
 	echo PHP version must be greater than $REQUIRED_PHP_VERSION. The current version is $(php -v | head -n 1 | cut -d ' ' -f 2).
 	exit 1
 fi
+if ! python3 --version | grep -q "Python 3"; then
+	echo Python3 8.x must be installed before you can continue
+	exit 1
+fi
 if ! php -m | grep -q "runkit7"; then
 	echo PHP extension runkit7 must be installed before you can continue
 	exit 1
