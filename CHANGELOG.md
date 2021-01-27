@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Released]
 
+## [1.1.2] - 2021-01-27 MH
+### Added
+- remove setup-composer.php after use
+
 ## [1.1.1] - 2021-01-26 MH
 ### Added
 - check for Python3

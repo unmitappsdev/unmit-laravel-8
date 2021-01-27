@@ -64,6 +64,7 @@ cp -p composer.json composer.json.dist
 php setup-composer.php
 (cat composer.json | python3 -m json.tool) > composer.tmp
 mv composer.tmp composer.json
+rm -f setup-composer.php
 composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle
 composer update
