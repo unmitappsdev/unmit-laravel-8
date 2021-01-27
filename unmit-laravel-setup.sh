@@ -69,6 +69,7 @@ composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle
 composer update
 composer dump-autoload
+rm -f resources/css/app.css
 # npm install
 # npm audit fix
 # npm run dev
