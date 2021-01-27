@@ -21,6 +21,10 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
+if ! node --version | grep -q "v15"; then
+	echo You need to be using NodeJS v15.x version before you can continue
+	exit 1
+fi
 # git init
 git init
 # install Laravel packages
@@ -64,13 +68,9 @@ composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle
 composer update
 composer dump-autoload
-# ./artisan ui:auth
 # npm install
-# npm install react
-# npm install react-dom
-# npm install react-hooks-async
+# npm audit fix
 # npm run dev
-#
 # set up folder permissions
 # WEBSVCUSER=$(ps aux | egrep -e '(bin/httpd|nginx|apache)' | grep -v -e $USER | grep -v -e 'root' | head -n 1 | cut -d " " -f1)
 # if git rev-parse --show-cdup | grep -q '\.'; then
