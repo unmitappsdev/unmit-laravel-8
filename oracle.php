@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'oracle' => [
+    env('DB_CONNECTION','oracle') => [
         'driver'         => 'oracle',
         'tns'            => env('DB_TNS', ''),
         'host'           => env('DB_HOST', ''),
