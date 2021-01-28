@@ -42,12 +42,14 @@ wget -O ./app/helpers.php https://raw.githubusercontent.com/hanovate/unmit/main/
 wget -O ./app/OracleModel.php https://raw.githubusercontent.com/hanovate/unmit/main/OracleModel.php
 wget -O ./app/Http/Kernel.php https://raw.githubusercontent.com/hanovate/unmit/main/Kernel.php
 wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/hanovate/unmit/main/Controller.php
-wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/web.php
-wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/common.php
-wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/app-extra.php
-wget -O ./config/javascript.php https://raw.githubusercontent.com/hanovate/unmit/main/javascript.php
+wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/web.php
+wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/common.php
+wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/config/app-extra.php
+wget -O ./config/javascript.php https://raw.githubusercontent.com/hanovate/unmit/main/config/javascript.php
 rm -f ./config/oracle.php
-wget -O ./config/oracle.php https://raw.githubusercontent.com/hanovate/unmit/main/oracle.php
+wget -O ./config/oracle.php https://raw.githubusercontent.com/hanovate/unmit/main/config/oracle.php
+rm -f ./config/auth.php
+wget -O ./config/auth.php https://raw.githubusercontent.com/hanovate/unmit/main/config/auth.php
 mkdir -p app/Auth/Guards
 wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
@@ -74,17 +76,3 @@ rm -f resources/css/app.css
 # npm install
 # npm audit fix
 # npm run dev
-# set up folder permissions
-# WEBSVCUSER=$(ps aux | egrep -e '(bin/httpd|nginx|apache)' | grep -v -e $USER | grep -v -e 'root' | head -n 1 | cut -d " " -f1)
-# if git rev-parse --show-cdup | grep -q '\.'; then
-# 	cd $(git rev-parse --show-cdup)
-# fi
-# sudo chmod u+x ./artisan
-# sudo chown -R $WEBSVCUSER:$WEBSVCUSER storage
-# sudo chmod -R 0664 storage
-# sudo find storage -type d -exec chmod 2775 '{}' \;
-# cd bootstrap
-# sudo chown -R $WEBSVCUSER:$WEBSVCUSER cache
-# sudo chmod -R 0664 cache
-# sudo find cache -type d -exec chmod 2775 '{}' \;
-# cd ..
