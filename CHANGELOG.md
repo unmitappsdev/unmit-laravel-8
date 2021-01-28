@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.3] - 2021-01-28 MH
 ### Added
 - reoranize files
+- add --force to artisan vendor:publish command
 
 ## [1.1.2] - 2021-01-27 MH
 ### Added

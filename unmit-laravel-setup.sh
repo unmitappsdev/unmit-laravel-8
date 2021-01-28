@@ -35,7 +35,7 @@ composer require laravel/ui
 ./artisan ui react
 composer require laracasts/utilities
 composer require hanovate/cas
-./artisan vendor:publish --tag=cas
+./artisan vendor:publish --tag=cas --force
 wget -O ./webpack.mix.js https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js
 wget -O ./package.json https://raw.githubusercontent.com/hanovate/unmit/main/package.json
 wget -O ./app/helpers.php https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php
@@ -69,7 +69,7 @@ mv composer.tmp composer.json
 rm -f composer.json.dist
 rm -f setup-composer.php
 composer require yajra/laravel-oci8:^8
-./artisan vendor:publish --tag=oracle
+./artisan vendor:publish --tag=oracle --force
 composer update
 composer dump-autoload
 rm -f resources/css/app.css
