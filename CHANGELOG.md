@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Released]
 
+## [1.1.4] - 2021-01-29 MH
+### Added
+- student-district.tar.gz
+
 ## [1.1.3] - 2021-01-28 MH
 ### Added
 - reoranize files

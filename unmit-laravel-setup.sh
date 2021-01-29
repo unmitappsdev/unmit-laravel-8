@@ -54,6 +54,8 @@ mkdir -p app/Auth/Guards
 wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
 wget -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/hanovate/unmit/main/BaseController.php
+rm -f ./app/Providers/AuthServiceProvider.php
+wget -O ./app/Providers/AuthServiceProvider.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Providers/AuthServiceProvider.php
 wget -O ./cas.env https://raw.githubusercontent.com/hanovate/unmit/main/cas.env
 wget -O ./resources.tar.gz https://raw.githubusercontent.com/hanovate/unmit/main/resources.tar.gz
 tar -xzvf resources.tar.gz
