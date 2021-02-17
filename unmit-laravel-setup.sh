@@ -41,13 +41,12 @@ wget -O ./package.json https://raw.githubusercontent.com/hanovate/unmit/main/pac
 wget -O ./app/helpers.php https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php
 wget -O ./app/OracleModel.php https://raw.githubusercontent.com/hanovate/unmit/main/OracleModel.php
 wget -O ./app/Http/Kernel.php https://raw.githubusercontent.com/hanovate/unmit/main/Kernel.php
-wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/hanovate/unmit/main/Controller.php
+wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controller/Controller.php
+wget -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controller/TextController.php
 wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/web.php
 wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/common.php
 wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/config/app-extra.php
 wget -O ./config/javascript.php https://raw.githubusercontent.com/hanovate/unmit/main/config/javascript.php
-rm -f ./config/oracle.php
-wget -O ./config/oracle.php https://raw.githubusercontent.com/hanovate/unmit/main/config/oracle.php
 rm -f ./config/auth.php
 wget -O ./config/auth.php https://raw.githubusercontent.com/hanovate/unmit/main/config/auth.php
 mkdir -p app/Auth/Guards
@@ -72,6 +71,8 @@ rm -f composer.json.dist
 rm -f setup-composer.php
 composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle --force
+rm -f ./config/oracle.php
+wget -O ./config/oracle.php https://raw.githubusercontent.com/hanovate/unmit/main/config/oracle.php
 composer update
 composer dump-autoload
 rm -f resources/css/app.css

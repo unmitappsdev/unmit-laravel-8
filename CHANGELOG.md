@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Released]
 
+## [1.1.5] - 2021-02-17 MH
+### Added
+- text edit module
+
 ## [1.1.4] - 2021-01-29 MH
 ### Added
 - student-district.tar.gz

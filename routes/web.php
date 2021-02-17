@@ -37,6 +37,11 @@ Route::middleware(['cas.auth'])->group(function() {
 		session()->forget('auth.account_type');
 		return cas()->logout(null,route('main.home'));
 	})->name('main.logout');
+
+	Route::middleware(['can:admin'])->group(function() {
+		Route::get('admin/text','TextController@index')->name('admin.text');
+		Route::post('admin/text','TextController@submit')->name('admin.text-submit');
+	});
 });
 
 
