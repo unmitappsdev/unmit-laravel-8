@@ -4,6 +4,14 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
 
+/**
+ * @see Controller
+ *
+ * @version 0.1.1 2021-02-25 George Raione - allow multiple searches
+ *	              separated by exploder
+ *   0.1.0 2020-05-08 MH - initial commit
+ */
+
 class BaseController extends Controller
 {
 
@@ -47,7 +55,7 @@ class BaseController extends Controller
 			$extraparam = [];
 		}
 		$objBase = $this->objBaseQuery($model,$search,$datacols,$extraparam);
-			
+
 		$total = $objBase->count();
 
 		$objs = $objBase->when($limit,function($query,$limit) {
@@ -76,7 +84,7 @@ class BaseController extends Controller
         $msg = 'Data retrieved successfully';
 
         return $this->sendResponse($result,$msg,$total);
-	}	
+	}
 
     public function sendResponse($result, $message, $total = null)
 	{
@@ -119,32 +127,36 @@ class BaseController extends Controller
 	public function objBaseQuery($model,$search,$datacols,$extraparam = null) {
 		$modelname = get_class($model);
 		$modelname = substr($modelname,strrpos($modelname,'\\')+1);
-		$obj = $model::when($search,function($query,$search) use ($datacols,$model) {
-			$query = $query->where(function($q) use ($datacols,$search,$model) {
-				$search = strtoupper($search);
-				foreach ($datacols as $k=>$v) {
-					if (isset($v['col_name'])) {
-						$q = $q->orWhereRaw('UPPER('.$v['col_name'].") LIKE '%".$search."%'");
-					} elseif (isset($v['search_col_name'])) {
-						if (strpos($v['search_col_name'],',')!==false) {
-							$search_col_name = explode(',',$v['search_col_name']);
-							foreach ($search_col_name as $vv) {
-								$q = $q->orWhereRaw('UPPER('.strtoupper($vv).") LIKE '%".$search."%'");
+		$exploder = $extraparam['exploder'] ?? null;
+		$obj = $model::when($search,function($query,$search) use ($datacols,$model,$exploder) {
+			$split_search = (!empty($explorder)) ? explode($exploder,$search) : [$search]; 
+			foreach ($split_search as $search) {
+				$query = $query->where(function($q) use ($datacols,$search,$model) {
+					$search = strtoupper($search);
+					foreach ($datacols as $k=>$v) {
+						if (isset($v['col_name'])) {
+							$q = $q->orWhereRaw('UPPER('.$v['col_name'].") LIKE '%".$search."%'");
+						} elseif (isset($v['search_col_name'])) {
+							if (strpos($v['search_col_name'],',')!==false) {
+								$search_col_name = explode(',',$v['search_col_name']);
+								foreach ($search_col_name as $vv) {
+									$q = $q->orWhereRaw('UPPER('.strtoupper($vv).") LIKE '%".$search."%'");
+								}
+							}
+						} elseif (isset($v['rel_name'])) {
+							$tmp = explode('->',$v['rel_name']);
+							$relmain = $tmp[0];
+							$elemain = $tmp[1];
+							if (isset($v['model_name'])) {
+								$modname = $v['model_name'];
+								$q = $q->orWhereHas($relmain,function($q) use ($modname,$elemain,$search) {
+									$q->whereRaw('UPPER('.column($elemain,$modname).") LIKE '%".$search."%'");
+								});
 							}
 						}
-					} elseif (isset($v['rel_name'])) {
-						$tmp = explode('->',$v['rel_name']);
-						$relmain = $tmp[0];
-						$elemain = $tmp[1];
-						if (isset($v['model_name'])) {
-							$modname = $v['model_name'];
-							$q = $q->orWhereHas($relmain,function($q) use ($modname,$elemain,$search) {
-								$q->whereRaw('UPPER('.column($elemain,$modname).") LIKE '%".$search."%'");
-							});
-						}
 					}
-				}
-			});
+				});
+			}
 			return $query;
 		})->when($extraparam,function($query,$extraparam) use ($modelname) {
 			if (is_array($extraparam)) {

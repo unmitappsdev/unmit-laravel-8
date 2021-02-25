@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - text edit module
 
+## [1.1.5] - 2021-02-25 George Rainone
+### Updated
+- BaseController allows multiple keyword searches
+
 ## [1.1.4] - 2021-01-29 MH
 ### Added
 - student-district.tar.gz
