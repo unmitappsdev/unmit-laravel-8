@@ -77,7 +77,7 @@ class BaseController extends Controller
 		})->get();
 
 		// convert to a collection resource
-		$modelname = "App\\Http\\Resources\\".class_basename(get_class($model)); 
+		$modelname = "App\\Http\\Resources\\".class_basename(get_class($model));
         $result =  $modelname::collection($objs);
 
         // return msdg
@@ -128,8 +128,9 @@ class BaseController extends Controller
 		$modelname = get_class($model);
 		$modelname = substr($modelname,strrpos($modelname,'\\')+1);
 		$exploder = $extraparam['exploder'] ?? null;
+        if (isset($extraparam['exploder'])) unset($extraparam['exploder']);
 		$obj = $model::when($search,function($query,$search) use ($datacols,$model,$exploder) {
-			$split_search = (!empty($explorder)) ? explode($exploder,$search) : [$search]; 
+			$split_search = ($exploder != null && $exploder != '') ? explode($exploder,$search) : [$search];
 			foreach ($split_search as $search) {
 				$query = $query->where(function($q) use ($datacols,$search,$model) {
 					$search = strtoupper($search);
