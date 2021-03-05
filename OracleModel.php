@@ -10,8 +10,9 @@ use Symfony\Component\Yaml\Yaml;
  * @see Yajra\Oci8\Eloquent\OracleEloquent
  *
  * @author Michael Han <mhan1@unm.edu>
- * @version 0.1.1 2020-10-28 MH accommodate for runkit 4.0.0a2: change runkit_method_add to runkit7_method_add
- * 	0.1.0 2020-02-12 MH initial commit
+ * @version 0.1.2 2021-03-05 MH check for installed version of runkit and run *_method_add accordingly
+ *   0.1.1 2020-10-28 MH accommodate for runkit 4.0.0a2: change runkit_method_add to runkit7_method_add
+ * 	 0.1.0 2020-02-12 MH initial commit
  * @since 0.1.0
  */
 class OracleModel extends Model
@@ -21,7 +22,9 @@ class OracleModel extends Model
      *
      * @var array
      */
-    public $dataIdentifiers;
+	public $dataIdentifiers;
+
+	public $runkit_version;
 
     /**
      * __construct
@@ -29,7 +32,12 @@ class OracleModel extends Model
      */
     function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+
+		// get runkit version
+		$extensions = get_loaded_extensions();
+		$extkey = array_search('runkit',$extensions);
+		$this->runkit_version = phpversion($extensions[$extkey]);
 
         // -- set model attributes from config files if they exist
 
@@ -130,14 +138,22 @@ class OracleModel extends Model
      */
     private function addGetSetMethods($methodname_key,$classname,$attribname)
     {
-        if (!method_exists($this,'get'.$methodname_key.'Attribute')) {
-            runkit7_method_add($classname,'get'.$methodname_key.'Attribute','$value',
+		if (!method_exists($this,'get'.$methodname_key.'Attribute')) {
+			if ($this->runkit_version == '4.0.0a2') 
+				runkit7_method_add($classname,'get'.$methodname_key.'Attribute','$value',
+					'return $this->attributes[\''.$attribname.'\'];',RUNKIT_ACC_PUBLIC);
+			else
+				runkit_method_add($classname,'get'.$methodname_key.'Attribute','$value',
                 'return $this->attributes[\''.$attribname.'\'];',RUNKIT_ACC_PUBLIC);
         }
 
         if (!method_exists($this,'set'.$methodname_key.'Attribute')) {
-            runkit7_method_add($classname,'set'.$methodname_key.'Attribute','$value',
-                '$this->attributes[\''.$attribname.'\'] = $value;',RUNKIT_ACC_PUBLIC);
+			if ($this->runkit_version == '4.0.0a2') 
+				runkit7_method_add($classname,'set'.$methodname_key.'Attribute','$value',
+					'$this->attributes[\''.$attribname.'\'] = $value;',RUNKIT_ACC_PUBLIC);
+			else
+				runkit_method_add($classname,'set'.$methodname_key.'Attribute','$value',
+					'$this->attributes[\''.$attribname.'\'] = $value;',RUNKIT_ACC_PUBLIC);
         }
     }
 

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Released]
 
+## [1.1.6] - 2021-03-05 MH
+### Added
+- check runkit version in OracleModel
+
 ## [1.1.5] - 2021-02-17 MH
 ### Added
 - text edit module
