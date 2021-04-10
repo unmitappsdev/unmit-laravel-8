@@ -11,7 +11,9 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @see BaseController
  *
- * @version 0.1.1 2021-01-05 MH add a constructor
+ * @version
+ *   1.0.1 2021-04-09 MH add %env:xxx% placeholder
+ *   0.1.1 2021-01-05 MH add a constructor
  *   0.1.0 2020-04-24 MH add getFormAttributes()
  *
  * @since 0.1.0
@@ -20,12 +22,6 @@ class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public $basedomain;
-/*
-	public function __construct() {
-		$this->basedomain = env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
-	}
- */
     public function getProcessedFormAttributeVars($content,$params = null)
     {
 		$prefix = '%route:';
@@ -65,6 +61,19 @@ class Controller extends BaseController
 			$langstr = '"'.__($paramvalue).'"';
 
 			$content = str_replace($str,$langstr,$content);
+		}
+
+		$prefix = '%env:';
+		$prefix_len = strlen($prefix);
+
+		while (($i = strpos($content,$prefix)) !== false) {
+			$j = strpos($content,'%',($i+1));
+			$str = substr($content,$i,$j-$i+1);
+			$paramvalue = substr($content,$i+$prefix_len,$j-($i+$prefix_len));
+
+			$repstr = env($paramvalue);
+
+			$content = str_replace($str,$repstr,$content);
 		}
 
 		return $content;

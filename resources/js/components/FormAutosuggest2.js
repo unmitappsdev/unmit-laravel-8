@@ -6,7 +6,7 @@
  * @version 0.1.0 2020-07-16 MH
  * @author Michael Han <mhan1@unm.edu>
  */
-import React,{ useRef, useState, useCallback } from "react";
+import React,{ useRef, useEffect, useState, useCallback } from "react";
 
 async function getData(dataUrl) {
   let sels;
@@ -54,6 +54,10 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
 
   const currentStyle = groupHidden ? {display:'none'}:{};
 
+  useEffect(() => {
+    setUserInput(displayValue);
+    setUserInputKey(value);
+  },[displayValue,value]);
 
   let oldValue = null, oldValueKey = null;
 
@@ -210,13 +214,13 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
       selectionsListComponent = (
         <ul className="selections">
           {filteredSelections.map((selection, index) => {
-            let className;
+            let classN;
 
             if (index === activeSelection) {
-              className = "selection-active";
+              classN = "selection-active";
             }
 
-            return <li className={className} key={index} onMouseDown={e=>handleClick(e,selection[field.values.key])}>{selection[field.values.key]} - {selection[field.values.display]}</li>;
+            return <li className={classN} key={index} onMouseDown={e=>handleClick(e,selection[field.values.key])}>{selection[field.values.key]} - {selection[field.values.display]}</li>;
           })}
         </ul>
       );
@@ -238,7 +242,7 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
 <>
   <label htmlFor={field.identifier} className={"col-md-" + field.view.label + " control-label"}>{field.label}</label>
   <div className={"col-md-" + field.view.data}>
-    <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
+    <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyUp={e => handleKeyUp(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
     <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} value={userInputKey} />
     { selectionsListComponent }
     { field.desc ? (
@@ -255,7 +259,7 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
 <>
 <div id={field.identifier + "-group"} style={currentStyle}>
   <label htmlFor={field.identifier} className="control-label">{field.label}</label>
-  <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
+	<input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyUp={e => handleKeyUp(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
   <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} value={userInputKey} />
   { selectionsListComponent }
   { field.desc ? (

@@ -41,8 +41,8 @@ wget -O ./package.json https://raw.githubusercontent.com/hanovate/unmit/main/pac
 wget -O ./app/helpers.php https://raw.githubusercontent.com/hanovate/unmit/main/helpers.php
 wget -O ./app/OracleModel.php https://raw.githubusercontent.com/hanovate/unmit/main/OracleModel.php
 wget -O ./app/Http/Kernel.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Kernel.php
-wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controller/Controller.php
-wget -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controller/TextController.php
+wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controllers/Controller.php
+wget -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controllers/TextController.php
 wget -O ./routes/web.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/web.php
 wget -O ./routes/common.php https://raw.githubusercontent.com/hanovate/unmit/main/routes/common.php
 wget -O ./config/app-extra.php https://raw.githubusercontent.com/hanovate/unmit/main/config/app-extra.php
@@ -52,6 +52,7 @@ wget -O ./config/auth.php https://raw.githubusercontent.com/hanovate/unmit/main/
 mkdir -p app/Auth/Guards
 wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/hanovate/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
+rm -f ./app/Http/Controllers/Api/BaseController.php
 wget -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Http/Controllers/Api/BaseController.php
 rm -f ./app/Providers/AuthServiceProvider.php
 wget -O ./app/Providers/AuthServiceProvider.php https://raw.githubusercontent.com/hanovate/unmit/main/app/Providers/AuthServiceProvider.php

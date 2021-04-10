@@ -10,6 +10,7 @@
  */
 import React,{ useRef, useState, useCallback } from "react";
 import { useAsyncCombineSeq, useAsyncRun, useAsyncTaskDelay, useAsyncTaskFetch } from "react-hooks-async";
+import FormLoadfrom from './FormLoadfrom';
 import FormText from './FormText';
 import FormNumber from './FormNumber';
 import FormRadio from './FormRadio';
@@ -38,6 +39,38 @@ export default function FormEdit({ formAttributes })
   const fetchTask = useAsyncTaskFetch(apiurl,initparam);
   const combinedTask = useAsyncCombineSeq(delayTask, fetchTask);
 
+	const ColoredLine = ({ color }) => (
+    <hr
+      style={{
+          color: color,
+          backgroundColor: color,
+          height: 1
+      }}
+    />
+	);
+
+  const handleLoadfrom = (field,v) => {
+    getData(field.values.url+v).then(d => {
+      if (typeof d != 'undefined') {
+
+        const keys = Object.keys(field.values.load);
+        keys.forEach((key, i) => {
+          if (field.values.load[key].length==1) {
+            if (d.data[field.values.load[key]]!=null) {
+              setTriggeredValue({...triggeredValue,[key]: d.data[field.values.load[key]]});
+            }
+          } else {
+            if (d.data[field.values.load[key][0]]!=null) {
+              setTriggeredValue({...triggeredValue,[key+'_key']: d.data[field.values.load[key][0]]});
+              setTriggeredValue({...triggeredValue,[key]: d.data[field.values.load[key][0]] + ' - ' + d.data[field.values.load[key][1]]});
+            }
+          }
+        });
+      }
+      setVals(triggeredValue);
+    });
+  };
+
   useAsyncRun(combinedTask);
 
   if (delayTask.pending) return <div className="alert alert-info" role="alert">Waiting...</div>;
@@ -52,6 +85,14 @@ export default function FormEdit({ formAttributes })
 
       {formAttributes.fieldData.map( (field,i) => {
         switch (field.type) {
+          case 'loadfrom':
+            return (
+              <>
+              <FormLoadfrom key={i} field={field} onUpdate={ v => handleLoadfrom(field,v) } />
+              <ColoredLine color="black" />
+              </>
+            );
+            break;
           case 'text':
             return <FormText key={i} field={field} value={eval('fetchTask.result.data.'+field.identifier)} />;
             break;

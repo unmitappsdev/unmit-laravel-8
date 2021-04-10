@@ -6,17 +6,22 @@
  * @version 0.1.0 2020-04-08 MH
  * @author Michael Han <mhan1@unm.edu>
  */
-import React,{ useRef, useState, useCallback } from "react";
+import React,{ useRef, useState, useEffect, useCallback } from "react";
 import { useAsyncCombineSeq, useAsyncRun, useAsyncTaskDelay, useAsyncTaskFetch } from "react-hooks-async";
 
 export default function FormAutosuggest({field,displayValue,value,onModify = v => v}) {
   const [activeSelection, setActiveSelection] = useState(0);
   const [filteredSelections, setFilteredSelections] = useState([]);
   const [showSelections, setShowSelections] = useState(false);
-  const [userInput, setUserInput] = useState(displayValue);
+	const [userInput, setUserInput] = useState(displayValue);
   const [userInputKey, setUserInputKey] = useState(value);
   const [userValueSet, setUserValueSet] = useState(false);
   const [groupHidden, setGroupHidden] = useState(field.view.hidden);
+
+  useEffect(() => {
+    setUserInput(displayValue);
+    setUserInputKey(value);
+  },[displayValue,value]);
 
   const delayTask = useAsyncTaskDelay(useCallback(() => 1200, []));
   const fetchTask = useAsyncTaskFetch(field.values.url);
@@ -39,8 +44,8 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
       oldValueKey = _old[field.identifier+'_key']; 
       delete _old[field.identifier];
       delete _old[field.identifier+'_key'];
-	  setUserInput(oldValue);
-	  setUserInputKey(oldValueKey);
+      setUserInput(oldValue);
+      setUserInputKey(oldValueKey);
     }
   }
 
@@ -155,13 +160,13 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
       selectionsListComponent = (
         <ul className="selections">
           {filteredSelections.map((selection, index) => {
-            let className;
+            let classN;
 
             if (index === activeSelection) {
-              className = "selection-active";
+              classN= "selection-active";
             }
 
-            return <li className={className} key={index} onMouseDown={e=>handleClick(e,selection[field.values.key])}>{selection[field.values.key]} - {selection[field.values.display]}</li>;
+            return <li className={classN} key={index} onMouseDown={e=>handleClick(e,selection[field.values.key])}>{selection[field.values.key]} - {selection[field.values.display]}</li>;
           })}
         </ul>
       );
@@ -184,13 +189,15 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
 
   // <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} defaultValue={oldValue!=null ? oldValue:((typeof init_value[field.identifier] != 'undefined') ? init_value[field.identifier]:value)} value={oldValue!=null ? oldValue:userInput} />
   // <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} defaultValue={oldValueKey!=null ? oldValueKey:((typeof init_value[field.identifier+'_key'] != 'undefined') ? init_value[field.identifier+'_key']:value)} value={oldValueKey!=null ? oldValueKey:userInputKey} />
+  /*
   if (field.values.trigger && (userValueSet == false) && (value!=null)) {
     let matchResult = selections.filter(findMatch);
-	if (matchResult[0] !== undefined) {
-		onModify(matchResult[0][field.values.trigger.value] ?? null);
-		setUserValueSet(true);
-	}
+    if (matchResult[0] !== undefined) {
+      onModify(matchResult[0][field.values.trigger.value] ?? null);
+      setUserValueSet(true);
+    }
   }
+  */
 
   return (
 <div className="form-group" id={field.identifier + "-group"} style={currentStyle}>
@@ -198,8 +205,8 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
 <>
   <label htmlFor={field.identifier} className={"col-md-" + field.view.label + " control-label"}>{field.label}</label>
   <div className={"col-md-" + field.view.data}>
-    <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
-    <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} value={userInputKey} />
+	  <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
+    <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} value={userInputKey}/>
     { selectionsListComponent }
     { field.desc ? (
       <>
@@ -215,8 +222,8 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
 <>
 <div id={field.identifier + "-group"} style={currentStyle}>
   <label htmlFor={field.identifier} className="control-label">{field.label}</label>
-  <input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
-  <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"} value={userInputKey} />
+	<input type={field.type} className="form-control" onBlur={() => setShowSelections(false)} onChange={e => handleInputChange(e)} onKeyDown={e => handleKeyDown(e)} name={field.identifier} id={field.identifier} {...field.attributes} placeholder={field.placeholder===null ? '':field.placeholder} value={userInput} />
+  <input type="hidden" id={field.identifier + "_key"} name={field.identifier + "_key"}  value={userInputKey} />
   { selectionsListComponent }
   { field.desc ? (
     <>

@@ -1,6 +1,15 @@
 <?php
 
+/*
+ * @version
+ * 1.0.0 2021-04-09 MH add get_basedomain()
+ */
+
 if (!function_exists('get_name')) {
+
+	function get_basedomain() {
+		return env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
+	}
 
 	function get_name($identifier,$classname,$nametype) {
 		$version = app()->version();

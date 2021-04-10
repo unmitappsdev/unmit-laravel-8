@@ -4,7 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+Types of changes
+* Added for new features
+* Changed for changes in existing functionality
+* Deprecated for soon-to-be removed features
+* Removed for now removed features
+* Fixed for any bug fixes
+* Security in case of vulnerabilities
+
 ## [Released]
+
+## [1.2.0] - 2021-04-09 MH
+### Added
+- resources/js/components/FormLoadfrom.js
+- resources/css/typography-fonts.css
+
+### Changed
+- app/Http/Controller/Controller.php: add %env:xxxx% to retrieve from ~/.env file
+- app/helpers.php: add get_basedomain() helper function -- this can be used to define your 'fqdn' in controllers
+- resources/view/layouts/base.blade.php: locally source the missing typography fonts
+- Form components 
+  resources/js/components/FormAdd.js
+  resources/js/components/FormEdit.js
+  resources/js/components/FormAutosuggest.js
+  resources/js/components/FormAutosuggest2.js
+
 
 ## [1.1.6] - 2021-03-05 MH
 ### Added

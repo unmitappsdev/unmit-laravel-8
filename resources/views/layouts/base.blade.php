@@ -12,6 +12,10 @@ Layout page for using ReactJS components
 <!DOCTYPE html SYSTEM "about:legacy-compat">
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}">
   <head>
+@if (env('APP_ENV')=='production')
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-2BCBPE2HLX">
+@endif
+    <script src="{{ mix('js/site.js') }}" type="text/javascript"></script>
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +25,8 @@ Layout page for using ReactJS components
     <meta name="description" content="UNM IT Application group is here to provide the application development needs of the university."/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="//webcore.unm.edu/v1/images/unm.ico" rel="shortcut icon"/>
-	<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7254094/6839152/css/fonts.css"/>
+	{{--<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7254094/6839152/css/fonts.css"/>--}}
+	<link href="{{ mix('css/typography-fonts.css') }}" rel="stylesheet" type="text/css" />
     <link href="//webcore.unm.edu/v2/css/unm-styles.min.css" rel="stylesheet"/>
     <link href="{{ mix('css/site-styles.css') }}" rel="stylesheet" media="screen" type="text/css"/>
     <link href="{{ mix('css/all.min.css') }}" type="text/css" rel="stylesheet">
