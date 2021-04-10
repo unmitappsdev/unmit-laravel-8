@@ -18,6 +18,7 @@ Types of changes
 ### Added
 - resources/js/components/FormLoadfrom.js
 - resources/css/typography-fonts.css
+- addition of onclear > reset fields to YAML defs
 
 ### Changed
 - app/Http/Controller/Controller.php: add %env:xxxx% to retrieve from ~/.env file

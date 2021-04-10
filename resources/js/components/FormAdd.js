@@ -43,7 +43,32 @@ export default function FormAdd({ formAttributes }) {
 
   const [vals,setVals] = useState({});
 
+  const handleTrigger = (field,v) => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (setTriggeredValue({...triggeredValue,[input.id]: input.value}))
+    );
+    // triggeredValue = vals;
+    if (field.values.hasOwnProperty('trigger') && field.values.trigger.hasOwnProperty('target')) {
+      setTriggeredValue({...triggeredValue,[field.values.trigger.target]: v}) 
+    }
+
+    if (triggeredValue[field.identifier]=='') {
+      if (field.hasOwnProperty('onclear') && field.onclear.hasOwnProperty('reset')) {
+        let str = field.onclear.reset;
+        let arr = str.split(",");
+        arr.forEach((elem) => {
+          setTriggeredValue({...triggeredValue,[elem.trim()]:''});
+          setTriggeredValue({...triggeredValue,[elem.trim()+'_key']: ''});
+        });
+      }
+    }
+    setVals(triggeredValue);
+  };
+
   const handleLoadfrom = (field,v) => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (setTriggeredValue({...triggeredValue,[input.id]: input.value}))
+    );
     getData(field.values.url+v).then(d => {
       if (typeof d != 'undefined') {
 
@@ -64,6 +89,27 @@ export default function FormAdd({ formAttributes }) {
       setVals(triggeredValue);
     });
   };
+/*
+  if (typeof _old != "undefined") {
+    console.log(_old);
+  }
+  */
+  /*
+	let foundold = false;
+  if (typeof _old != "undefined" && _old.length>0) {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (setTriggeredValue({...triggeredValue,[input.id]: input.value}))
+    );
+    const oldkeys = Object.keys(_old);
+    oldkeys.forEach((okey) => {
+      setTriggeredValue({...triggeredValue,[okey]: _old[okey]});
+      if (typeof _old[okey+'_key'] != "undefined") {
+        setTriggeredValue({...triggeredValue,[okey+'_key']: _old[okey+'_key']});
+      }
+    });
+    setVals(triggeredValue);
+	}
+  */
 
   return (
     <>
@@ -87,10 +133,10 @@ export default function FormAdd({ formAttributes }) {
             return <FormTextarea key={i} field={field} value={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} />;
             break;
           case 'autosuggest':
-            return <FormAutosuggest key={i} field={field} displayValue={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} value={vals.hasOwnProperty(field.identifier+'_key') ? vals[field.identifier+'_key']:''} onModify={ v => setVals({...vals,[field.values.trigger.target]: v}) } />;
+            return <FormAutosuggest key={i} field={field} displayValue={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} value={vals.hasOwnProperty(field.identifier+'_key') ? vals[field.identifier+'_key']:''} onModify={ v => handleTrigger(field,v) } />;
             break;
           case 'autosuggest2':
-            return <FormAutosuggest2 key={i} field={field} displayValue={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} value={vals.hasOwnProperty(field.identifier+'_key') ? vals[field.identifier+'_key']:''} onModify={ v => setVals({...vals,[field.values.trigger.target]: v}) } />;
+            return <FormAutosuggest2 key={i} field={field} displayValue={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} value={vals.hasOwnProperty(field.identifier+'_key') ? vals[field.identifier+'_key']:''} onModify={ v => handleTrigger(field,v) } />;
             break;
           case 'simple-autosuggest':
             return <FormSimpleAutosuggest key={i} field={field} displayValue={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} value={vals.hasOwnProperty(field.identifier) ? vals[field.identifier]:''} />;
