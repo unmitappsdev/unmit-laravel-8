@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.1] - 2021-04-15 MH
+### Added
+- allow for %label:xxx% usage under ./resources/models/*.yaml definition files
+
 ## [1.2.0] - 2021-04-09 MH
 ### Added
 - resources/js/components/FormLoadfrom.js

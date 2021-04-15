@@ -10,7 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  * @see Yajra\Oci8\Eloquent\OracleEloquent
  *
  * @author Michael Han <mhan1@unm.edu>
- * @version 0.1.2 2021-03-05 MH check for installed version of runkit and run *_method_add accordingly
+ * @version 0.1.3 2021-04-15 MH allow for %label% in resources/models/*.yaml
+ *   0.1.2 2021-03-05 MH check for installed version of runkit and run *_method_add accordingly
  *   0.1.1 2020-10-28 MH accommodate for runkit 4.0.0a2: change runkit_method_add to runkit7_method_add
  * 	 0.1.0 2020-02-12 MH initial commit
  * @since 0.1.0
@@ -190,8 +191,23 @@ class OracleModel extends Model
     {
         extract($vars,EXTR_REFS | EXTR_SKIP);
 
-        foreach ($vars as $k => $v) {
-            $this->$k = $$k;
+		foreach ($vars as $k => $v) {
+			$kvalue = $$k;
+
+			$prefix = '%lang:';
+			$prefix_len = strlen($prefix);
+
+			if (($i = strpos($kvalue,$prefix)) !== false) {
+				$j = strpos($kvalue,'%',($i+1));
+				$str = substr($kvalue,$i,$j-$i+1);
+				$paramvalue = substr($kvalue,$i+$prefix_len,$j-($i+$prefix_len));
+
+				$langstr = '"'.__($paramvalue).'"';
+				
+				$kvalue = $langstr;
+			}
+
+            $this->$k = $kvalue;
         }
     }
 }
