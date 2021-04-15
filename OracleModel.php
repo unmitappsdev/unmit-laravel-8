@@ -197,7 +197,7 @@ class OracleModel extends Model
 			$prefix = '%lang:';
 			$prefix_len = strlen($prefix);
 
-			if (($i = strpos($kvalue,$prefix)) !== false) {
+			if ((!is_array($kvalue)) && (($i = strpos($kvalue,$prefix)) !== false)) {
 				$j = strpos($kvalue,'%',($i+1));
 				$str = substr($kvalue,$i,$j-$i+1);
 				$paramvalue = substr($kvalue,$i+$prefix_len,$j-($i+$prefix_len));
