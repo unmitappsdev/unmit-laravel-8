@@ -22,6 +22,24 @@ class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+	public function getProcessedCommonAttributeVars($content,$params = null)
+	{
+		$prefix = '%lang:';
+		$prefix_len = strlen($prefix);
+
+		while (($i = strpos($content,$prefix)) !== false) {
+			$j = strpos($content,'%',($i+1));
+			$str = substr($content,$i,$j-$i+1);
+			$paramvalue = substr($content,$i+$prefix_len,$j-($i+$prefix_len));
+
+			$langstr = '"'.__($paramvalue).'"';
+
+			$content = str_replace($str,$langstr,$content);
+		}
+
+		return $content;
+	}
+
     public function getProcessedFormAttributeVars($content,$params = null)
     {
 		$prefix = '%route:';
@@ -50,19 +68,6 @@ class Controller extends BaseController
 			$content = str_replace($str,$routepath,$content);
 		}
 
-		$prefix = '%lang:';
-		$prefix_len = strlen($prefix);
-
-		while (($i = strpos($content,$prefix)) !== false) {
-			$j = strpos($content,'%',($i+1));
-			$str = substr($content,$i,$j-$i+1);
-			$paramvalue = substr($content,$i+$prefix_len,$j-($i+$prefix_len));
-
-			$langstr = '"'.__($paramvalue).'"';
-
-			$content = str_replace($str,$langstr,$content);
-		}
-
 		$prefix = '%env:';
 		$prefix_len = strlen($prefix);
 
@@ -75,6 +80,8 @@ class Controller extends BaseController
 
 			$content = str_replace($str,$repstr,$content);
 		}
+
+		$content = $this->getProcessedCommonAttributeVars($content,$params);
 
 		return $content;
     }
@@ -112,7 +119,9 @@ class Controller extends BaseController
 			$routepath = route($paramvalue);
 
 			$content = str_replace($str,$routepath,$content);
-		}
+        }
+
+		$content = $this->getProcessedCommonAttributeVars($content,$params);
 
 		return $content;
 	}

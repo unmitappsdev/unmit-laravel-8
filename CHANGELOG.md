@@ -16,7 +16,8 @@ Types of changes
 
 ## [1.2.1] - 2021-04-15 MH
 ### Added
-- allow for %label:xxx% usage under ./resources/models/*.yaml definition files
+- allow for %lang:xxx% usage under ./resources/models/*.yaml definition files
+- allow for %lang:xxx% usage for table definition files as well
 
 ## [1.2.0] - 2021-04-09 MH
 ### Added
