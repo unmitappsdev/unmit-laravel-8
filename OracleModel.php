@@ -37,7 +37,7 @@ class OracleModel extends Model
 
 		// get runkit version
 		$extensions = get_loaded_extensions();
-		$extkey = array_search('runkit',$extensions);
+		$extkey = array_search('runkit7',$extensions);
 		$this->runkit_version = phpversion($extensions[$extkey]);
 
         // -- set model attributes from config files if they exist
