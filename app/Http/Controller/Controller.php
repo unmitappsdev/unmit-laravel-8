@@ -105,7 +105,7 @@ class Controller extends BaseController
 		return $config_vars;
 	}
 
-	public function getProcessedTableAttributeVars($content)
+	public function getProcessedTableAttributeVars($content,$params=null)
 	{
 		// placeholder for now
 		$prefix = '%customparamname:';
