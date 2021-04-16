@@ -98,9 +98,20 @@ class OracleModel extends Model
 				$attr_name = $v['attr_name'];
 				$result[$k] = $this->$attr_name;
 			} elseif (isset($v['format'])) {
-				if ($v['format']=='date.standard_timestamp') {
-					$tmp_date = \Carbon\Carbon::parse($this->$k);
-					$result[$k] = $tmp_date->isoFormat('MM/DD/YYYY h:mm A');
+                if (strpos($v['format'],'date')===0) {
+                    if ($v['format']=='date.standard_timestamp') {
+                        $tmp_date = \Carbon\Carbon::parse($this->$k);
+                        $result[$k] = $tmp_date->isoFormat('MM/DD/YYYY h:mm A');
+                    } elseif ($v['format']=='date.standard') {
+                        $tmp_date = \Carbon\Carbon::parse($this->$k);
+                        $result[$k] = $tmp_date->isoFormat('MM/DD/YYYY');
+                    } elseif ($v['format']=='date.short_month') {
+                        $tmp_date = \Carbon\Carbon::parse($this->$k);
+                        $result[$k] = $tmp_date->isoFormat('MMM Do YYYY');
+                    }
+                } elseif(strpos($v['format'],'is ')===0) {
+                    $tmp_date = \Carbon\Carbon::parse($this->$k);
+                    $result[$k] = $tmp_date->isoFormat(substr($v['format'],3));
 				} else {
 					$result[$k] = $this->$k;
 				}

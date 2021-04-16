@@ -14,6 +14,11 @@ Types of changes
 
 ## [Released]
 
+## [1.2.2] - 2021-04-15 George Rainone
+### Added
+- additional date formats in definition files
+
+
 ## [1.2.1] - 2021-04-15 MH
 ### Added
 - allow for %lang:xxx% usage under ./resources/models/*.yaml definition files
