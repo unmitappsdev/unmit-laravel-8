@@ -14,6 +14,11 @@ Types of changes
 
 ## [Released]
 
+## [1.2.3] - 2021-04-16 George Rainone
+### Fixed
+- key/value pair reference in FormDropdown component
+
+
 ## [1.2.2] - 2021-04-15 George Rainone
 ### Added
 - additional date formats in definition files

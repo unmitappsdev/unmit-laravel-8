@@ -3,14 +3,15 @@
  *
  * @file Dropdown field component
  *
- * @version 0.1.0 2019-10-17 MH
+ * @version 0.1.1 2021-04-16 George Rainone fix how key/value are stored & read
+ *   0.1.0 2019-10-17 MH
  * @author Michael Han <mhan1@unm.edu>
  */
-import React from "react";
+import React,{ useState } from "react";
 
 export default function FormDropdown({field,value}) {
-  const keys = Object.keys(field.values[0]);
-  const vals = Object.values(field.values[0]);
+  const keys = Object.keys(field.values);
+  const vals = Object.values(field.values);
   const [groupHidden, setGroupHidden] = useState(field.view.hidden);
 
   const currentStyle = groupHidden ? {display:'none'}:{};
