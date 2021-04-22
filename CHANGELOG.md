@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.5] - 2021-04-22 MH
+### Fixed
+- location for Controller.php & TextController.php
+
 ## [1.2.4] - 2021-04-21 MH
 ### Added
 - server location badge
