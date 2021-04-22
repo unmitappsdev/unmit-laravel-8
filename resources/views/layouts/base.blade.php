@@ -181,6 +181,11 @@ Layout page for using ReactJS components
 				--}}
                 @endif
               </ul>
+		  @if (($hhost = substr(Request::getHttpHost(),strpos(Request::getHttpHost(),'.')+1))!='oraweb02p.unm.edu')
+              <ul class="nav navbar-nav navbar-right">
+				  <li class="btn-group btn-group-xs"><button class="btn btn-primary">This is on <span class="badge">{{ $hhost == 'oraweb02i.unm.edu' ? 'integration':($hhost == 'oraweb02d.unm.edu' ? 'development':(Request::getHttpHost())) }}</span> server</button></li>
+			  </ul>
+		  @endif
             </nav>
           </div>
         </div>
