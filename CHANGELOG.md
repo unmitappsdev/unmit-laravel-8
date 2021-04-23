@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.6] - 2021-04-23 MH
+### Changed
+- allow for blank relational keys
+
 ## [1.2.5] - 2021-04-22 MH
 ### Fixed
 - location for Controller.php & TextController.php

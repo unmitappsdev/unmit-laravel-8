@@ -10,7 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  * @see Yajra\Oci8\Eloquent\OracleEloquent
  *
  * @author Michael Han <mhan1@unm.edu>
- * @version 0.1.3 2021-04-15 MH allow for %label% in resources/models/*.yaml
+ * @version 0.1.4 2021-04-23 MH allow for blank relational keys
+ *   0.1.3 2021-04-15 MH allow for %label% in resources/models/*.yaml
  *   0.1.2 2021-03-05 MH check for installed version of runkit and run *_method_add accordingly
  *   0.1.1 2020-10-28 MH accommodate for runkit 4.0.0a2: change runkit_method_add to runkit7_method_add
  * 	 0.1.0 2020-02-12 MH initial commit
@@ -153,10 +154,10 @@ class OracleModel extends Model
 		if (!method_exists($this,'get'.$methodname_key.'Attribute')) {
 			if ($this->runkit_version == '4.0.0a2') 
 				runkit7_method_add($classname,'get'.$methodname_key.'Attribute','$value',
-					'return $this->attributes[\''.$attribname.'\'];',RUNKIT_ACC_PUBLIC);
+					'return isset($this->attributes[\''.$attribname.'\']) ? $this->attributes[\''.$attribname.'\']:null;',RUNKIT_ACC_PUBLIC);
 			else
 				runkit_method_add($classname,'get'.$methodname_key.'Attribute','$value',
-                'return $this->attributes[\''.$attribname.'\'];',RUNKIT_ACC_PUBLIC);
+                'return isset($this->attributes[\''.$attribname.'\']) ? $this->attributes[\''.$attribname.'\']:null;',RUNKIT_ACC_PUBLIC);
         }
 
         if (!method_exists($this,'set'.$methodname_key.'Attribute')) {
