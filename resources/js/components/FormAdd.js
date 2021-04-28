@@ -41,6 +41,15 @@ export default function FormAdd({ formAttributes }) {
     triggeredValue = v;
   };
 
+  formAttributes.fieldData.map((field) => {
+    if (field.hasOwnProperty('default')) {
+      setTriggeredValue({...triggeredValue,[field.identifier]: field.default});
+    }
+    if (field.hasOwnProperty('defaultKey')) {
+      setTriggeredValue({...triggeredValue,[field.identifier+'_key']: field.default});
+    }
+  });
+
   const [vals,setVals] = useState({});
 
   const handleTrigger = (field,v) => {

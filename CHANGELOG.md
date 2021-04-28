@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.7] - 2021-04-28 MH
+### Added
+- FormAdd components now accepts "default" and "defaultKey" values
+
 ## [1.2.6] - 2021-04-23 MH
 ### Changed
 - allow for blank relational keys
