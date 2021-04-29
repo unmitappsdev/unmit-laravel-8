@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.8] - 2021-04-29 MH
+### Added
+- FormAutosuggest & FormAutosuggest2 components now accepts "url_param_fields" values
+
 ## [1.2.7] - 2021-04-28 MH
 ### Added
 - FormAdd components now accepts "default" and "defaultKey" values

@@ -3,17 +3,26 @@
  *
  * @file Autosuggest field component
  *
- * @version 0.1.0 2020-04-08 MH
+ * @version 0.1.2 2021-04-29 MH accommodate for url_param_fields
+ *  0.1.0 2020-04-08 MH
  * @author Michael Han <mhan1@unm.edu>
  */
 import React,{ useRef, useState, useEffect, useCallback } from "react";
 import { useAsyncCombineSeq, useAsyncRun, useAsyncTaskDelay, useAsyncTaskFetch } from "react-hooks-async";
 
 export default function FormAutosuggest({field,displayValue,value,onModify = v => v}) {
+  var fieldValues = {};
+  const setFieldValues = v => {
+    fieldValues = v;
+  };
+  Array.from(document.querySelectorAll("input")).forEach(
+    input => (setFieldValues({...fieldValues,[input.id]: input.value}))
+  );
+
   const [activeSelection, setActiveSelection] = useState(0);
   const [filteredSelections, setFilteredSelections] = useState([]);
   const [showSelections, setShowSelections] = useState(false);
-	const [userInput, setUserInput] = useState(displayValue);
+  const [userInput, setUserInput] = useState(displayValue);
   const [userInputKey, setUserInputKey] = useState(value);
   const [userValueSet, setUserValueSet] = useState(false);
   const [groupHidden, setGroupHidden] = useState(field.view.hidden);
@@ -23,8 +32,25 @@ export default function FormAutosuggest({field,displayValue,value,onModify = v =
     setUserInputKey(value);
   },[displayValue,value]);
 
+  let urlParams = '';
+  let numParams = 0;
+
+  if (field.values.hasOwnProperty('url_param_fields')) {
+    let arrstr = field.values.url_param_fields.split(",");
+    arrstr.forEach((elem) => {
+      if (fieldValues[elem.trim()]!==undefined) {
+        if (urlParams == '')
+          urlParams = '?';
+        numParams = numParams + 1;
+        if (numParams > 1)
+          urlParams = urlParams + '&';
+        urlParams = urlParams + elem + '=' + fieldValues[elem.trim()];
+      }
+    });
+  }
+
   const delayTask = useAsyncTaskDelay(useCallback(() => 1200, []));
-  const fetchTask = useAsyncTaskFetch(field.values.url);
+  const fetchTask = useAsyncTaskFetch(field.values.url + urlParams);
   const combinedTask = useAsyncCombineSeq(delayTask, fetchTask);
 
   const currentStyle = groupHidden ? {display:'none'}:{};

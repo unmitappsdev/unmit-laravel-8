@@ -43,6 +43,14 @@ function getData2(dataUrl) {
 }
 
 export default function FormAutosuggest2({field,displayValue,value,onModify = v => v}) {
+  var fieldValues = {};
+  const setFieldValues = v => {
+    fieldValues = v;
+  };
+  Array.from(document.querySelectorAll("input")).forEach(
+    input => (setFieldValues({...fieldValues,[input.id]: input.value}))
+  );
+
   const [activeSelection, setActiveSelection] = useState(0);
   const [filteredSelections, setFilteredSelections] = useState([]);
   const [showSelections, setShowSelections] = useState(false);
@@ -50,7 +58,25 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
   const [userInputKey, setUserInputKey] = useState(value);
   const [groupHidden, setGroupHidden] = useState(field.view.hidden);
 
-	const dataFetchUrl = field.values.url + '/' + userInput;
+  let urlParams = '';
+  let numParams = 0;
+
+  if (field.values.hasOwnProperty('url_param_fields')) {
+    let arrstr = field.values.url_param_fields.split(",");
+    arrstr.forEach((elem) => {
+      if (fieldValues[elem.trim()]!==undefined) {
+        if (urlParams == '')
+          urlParams = '?';
+        numParams = numParams + 1;
+        if (numParams > 1)
+          urlParams = urlParams + '&';
+        urlParams = urlParams + elem + '=' + fieldValues[elem.trim()];
+      }
+    });
+  }
+
+
+  const dataFetchUrl = field.values.url + '/' + userInput + urlParams;
 
   const currentStyle = groupHidden ? {display:'none'}:{};
 
