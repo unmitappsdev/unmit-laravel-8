@@ -50,7 +50,7 @@ export default function FormAdd({ formAttributes }) {
     }
   });
 
-  const [vals,setVals] = useState({});
+  const [vals,setVals] = useState(triggeredValue);
 
   const handleTrigger = (field,v) => {
     Array.from(document.querySelectorAll("input")).forEach(
