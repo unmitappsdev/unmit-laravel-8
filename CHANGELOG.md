@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.10] - 2021-07-13 MH
+### Changed
+- Update package.json & webpack.mix.js to accommodate updated versions of NodeJS & npm (v15.14)
+
 ## [1.2.9] - 2021-04-30 MH
 ### Fixed
 - FormAdd initial value of vals for defaults

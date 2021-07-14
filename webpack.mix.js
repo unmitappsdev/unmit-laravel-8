@@ -36,7 +36,7 @@ var path = require('path');
 var fs = require('fs');
 var cfiles = fs.readdirSync(cpath).forEach(file => {
     if ((path.extname(file).toLowerCase() === '.js') || (path.extname(file).toLowerCase() === '.jsx'))
-        mix.react(cpath+file,'public/js/components');
+        mix.js(cpath+file,'public/js/components').react();
 });
 
 // copy over image resources
