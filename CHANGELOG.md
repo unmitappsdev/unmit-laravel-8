@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.11] - 2021-10-19 MH
+### Added
+- sortfuncs parameter to allow DB native functions for sorting (e.g. TO_NUMBER) in Api/BaseController class
+
 ## [1.2.10] - 2021-07-13 MH
 ### Changed
 - Update package.json & webpack.mix.js to accommodate updated versions of NodeJS & npm (v15.14)

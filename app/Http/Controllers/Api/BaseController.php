@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller as Controller;
 /**
  * @see Controller
  *
- * @version 0.1.1 2021-02-25 George Raione - allow multiple searches
- *	              separated by exploder
+ * @version 0.1.2 2021-10-19 MH add sortfuncs parameter to allow DB native functions for sorting (e.g. TO_NUMBER)
+ *	 0.1.1 2021-02-25 George Raione - allow multiple searches separated by explode()
  *   0.1.0 2020-05-08 MH - initial commit
+ *
+ * @since 0.1.0
  */
 
 class BaseController extends Controller
@@ -41,12 +43,23 @@ class BaseController extends Controller
 		else
 			$sort = request()->query('sort') ?? null;
 
+		if (isset($param['sortfuncs']))
+			$sortfuncs = $param['sortfuncs'];
+		else
+			$sortfuncs = request()->query('sortfuncs') ?? null;
+
 		$datacols = $model->dataIdentifiers;
 
 		if ($sort) {
 			$sort_elems = explode(',',$sort);
 		} else {
 			$sort_elems = null;
+		}
+
+		if ($sortfuncs) {
+			$sortfunc_elems = explode(',',$sortfuncs);
+		} else {
+			$sortfunc_elems = null;
 		}
 
 		if (isset($param['extra'])) {
@@ -62,16 +75,29 @@ class BaseController extends Controller
 			return $query->limit($limit);
 		})->when($offset,function($query,$offset) {
 			return $query->offset($offset);
-		})->when($sort,function($query,$sort) use ($sort_elems,$datacols) {
+		})->when($sort,function($query,$sort) use ($sort_elems,$sortfunc_elems,$datacols) {
 			foreach ($sort_elems as $v) {
 				if (substr($v,-1) == '-') {
-					$key = $datacols[substr($v,0,-1)]['col_name'];
+					$canonical_key = substr($v,0,-1);
+					$key = $datacols[$canonical_key]['col_name'];
 					$dir = 'desc';
 				} else {
-					$key = $datacols[$v]['col_name'];
+					$canonical_key = $v;
+					$key = $datacols[$canonical_key]['col_name'];
 					$dir = 'asc';
 				}
-				$query = $query->orderBy($key,$dir);
+				$found = false;
+				foreach($sortfunc_elems as $vv) {
+					$sf_elems = explode('=',$vv);
+					if ($sf_elems[0]==$canonical_key) {
+						$key = $sf_elems[1].'('.$key.')';
+						$found = true;
+					}
+				}
+				if ($found)
+					$query = $query->orderByRaw($key.' '.$dir);
+				else
+					$query = $query->orderBy($key,$dir);
 			}
 			return $query;
 		})->get();
