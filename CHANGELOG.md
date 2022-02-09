@@ -17,6 +17,7 @@ Types of changes
 ## [1.2.12] - 2022-02-08 MH
 ### Changed
 - required NodeJS to v14 instead of v15 to match the one on oraweb02p (currently available production server) on unmit-laravel-setup.sh version checking code
+- from customized hanovate/cas package to subfission/cas
 
 ## [1.2.11] - 2021-10-19 MH
 ### Added

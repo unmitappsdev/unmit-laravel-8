@@ -21,8 +21,8 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
-if ! node --version | grep -q "v16"; then
-	echo You need to be using NodeJS v16.x version before you can continue
+if ! node --version | grep -q "v14"; then
+	echo You need to be using NodeJS v14.x version before you can continue
 	exit 1
 fi
 # git init
@@ -34,7 +34,7 @@ composer require symfony/yaml
 composer require laravel/ui
 ./artisan ui react
 composer require laracasts/utilities
-composer require hanovate/cas
+composer require subfission/cas
 ./artisan vendor:publish --tag=cas --force
 wget -O ./webpack.mix.js https://raw.githubusercontent.com/hanovate/unmit/main/webpack.mix.js
 wget -O ./package.json https://raw.githubusercontent.com/hanovate/unmit/main/package.json
