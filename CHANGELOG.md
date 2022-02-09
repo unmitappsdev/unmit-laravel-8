@@ -14,6 +14,14 @@ Types of changes
 
 ## [Released]
 
+## [1.2.12] - 2022-02-08 MH
+### Changed
+- required NodeJS to v14 instead of v15 to match the one on oraweb02p (currently available production server) on unmit-laravel-setup.sh version checking code
+
+## [1.2.11] - 2021-10-19 MH
+### Added
+- sortfuncs parameter to allow DB native functions for sorting (e.g. TO_NUMBER) in Api/BaseController class
+
 ## [1.2.11] - 2021-10-19 MH
 ### Added
 - sortfuncs parameter to allow DB native functions for sorting (e.g. TO_NUMBER) in Api/BaseController class
