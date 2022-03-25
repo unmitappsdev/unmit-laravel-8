@@ -14,6 +14,11 @@ Types of changes
 
 ## [Released]
 
+## [1.2.13] - 2022-03-25 MH
+### Added
+- no_search key in ./resources/models/
+- key_only key in ./resources/data/
+
 ## [1.2.12] - 2022-02-08 MH
 ### Changed
 - required NodeJS to v14 instead of v15 to match the one on oraweb02p (currently available production server) on unmit-laravel-setup.sh version checking code

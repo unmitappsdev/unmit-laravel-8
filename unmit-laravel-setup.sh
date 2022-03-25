@@ -21,10 +21,11 @@ if ! php artisan --version | grep -q "Laravel Framework 8"; then
 	echo You need to be using Laravel 8.x version before you can continue
 	exit 1
 fi
-if ! node --version | grep -q "v14"; then
-	echo You need to be using NodeJS v14.x version before you can continue
-	exit 1
-fi
+#if ! node --version | grep -q "v14"; then
+#	echo You need to be using NodeJS v14.x version before you can continue
+#	exit 1
+#fi
+
 # git init
 git init
 # install Laravel packages

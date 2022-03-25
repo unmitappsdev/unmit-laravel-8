@@ -161,7 +161,7 @@ class BaseController extends Controller
 				$query = $query->where(function($q) use ($datacols,$search,$model) {
 					$search = strtoupper($search);
 					foreach ($datacols as $k=>$v) {
-						if (isset($v['col_name'])) {
+						if (isset($v['col_name']) && !(isset($v['no_search']) && $v['no_search'])) {
 							$q = $q->orWhereRaw('UPPER('.$v['col_name'].") LIKE '%".$search."%'");
 						} elseif (isset($v['search_col_name'])) {
 							if (strpos($v['search_col_name'],',')!==false) {
