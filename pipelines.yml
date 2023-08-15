@@ -1,0 +1,82 @@
+# Pipeline to deploy to a server when pushed to master
+# and populate .env from Azure Key Vault
+#
+# MUST DEFINE VARIABLES BEFORE RUNNING
+#
+# v1.0 - initial commit
+
+trigger:
+- master
+
+jobs:
+  - deployment: DeployToServer
+    displayName: 'Deploy to server'
+    environment: $(server.environment)
+    pool:
+      name: $(server.poolname)
+      demands: Agent.Name -equals $(server.agentname)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: $(Build.SourcesDirectory)
+              Contents: |
+                **/*
+                !.git/**/*
+              TargetFolder: $(app.path)
+              CleanTargetFolder: false
+              OverWrite: true
+            displayName: 'Deploy app to server'
+          - script: |
+              cd $(app.path)
+              rm -fr node_modules
+              rm -fr vendor
+              find . -type f -not -path "./storage/framework/views/*" -exec chmod g+w {} \;
+            displayName: 'Update group permission'
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: 'UNM-Information-Technologies-Prod-IT-Apps-Keyvault-POC-laravel'
+              keyVaultName: 'UNM-IT-Apps-Keyvault-POC'
+              SecretsFilter: $(app.dbpassword)
+              RunAsPreJob: true
+            displayName: 'Grab secrets from key vault'
+          - script: |
+              cd $(app.path)
+              mv .env.$(server.agentname) .env
+              sed -i 's#{app.url}#$(app.url)#g' .env
+              sed -i 's#{$(app.dbpassword)}#$(app.dbpassword)#g' .env
+            displayName: 'Populate .env file'
+# begin sonarqube -- wip
+#
+#          - task: SonarQubePrepare@5
+#            inputs:
+#              SonarQube: 'SonarQube'
+#              scannerMode: 'CLI'
+#              configMode: 'file'
+#          - task: SonarQubeAnalyze@5
+# end sonarqube -- wip
+          - script: |
+              cd $(app.path)
+              /usr/local/bin/composer update
+            displayName: 'Run composer update'
+          - task: Npm@1 
+            inputs:
+              command: 'install'
+              workingDir: '$(app.path)'
+            displayName: 'Run npm i'
+          - script: |
+              cd $(app.path)
+              vendor/phpunit/phpunit/phpunit --debug --verbose
+            displayName: 'Run unit tests'
+          - script: |
+              response=$(curl -s -o /dev/null -w "%{http_code}" $(app.url))
+              if [ "$response" -ne 200 ]; then
+                echo "Application is either misconfigured or is not running at $(app.url)"
+                exit 1
+              else
+                echo "Application is running fine!"
+              fi
+            displayName: "Check HTTP response"

@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.14] - 2023-08-15 MH
+### Added
+- add pipelines.yml to make it easy to set up a Pipeline for the project
+
 ## [1.2.13] - 2022-03-25 MH
 ### Added
 - no_search key in ./resources/models/
