@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.15] - 2023-10-19 MH
+### Changed
+- update pipelines.yml to reflect the latest instruction for creating pipelines
+
 ## [1.2.14] - 2023-08-15 MH
 ### Added
 - add pipelines.yml to make it easy to set up a Pipeline for the project

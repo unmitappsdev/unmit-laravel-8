@@ -3,10 +3,30 @@
 #
 # MUST DEFINE VARIABLES BEFORE RUNNING
 #
-# v1.0 - initial commit
+# v1.1 - divide into stages 2023-10-19 MH
+# v1.0 - initial commit 2023-07-01 Michael Han <mhan1@unm.edu>
 
+# ON TRIGGER AND USE OF THE DEFAULT BRANCH NAME
+# Start the pipeline when an update is made to master branch.
+# As of 2023, many socially-sensitive companies have switched to main as
+# the name for default branch, but git maintains the default branch
+# name of master, therefore the master branch is set as the default here
+# since we do not rely on any third-party company for our development 
+# repositories. Please do change this if the default branch name is
+# something else than master.
+# ---
 trigger:
 - master
+
+# ON DECLARING VARIABLES HERE 
+# In order to make this file portable, and to possibly prevent unnecessary
+# updates to the file itself, the default instructions are to set the variables
+# directly on Azure DevOps via the browser, but it is perfectly fine
+# to declare the variables here if necessary.
+# ---
+#variables:
+#  variable1: 'value1'
+#  variable2: 'value2'
 
 jobs:
   - deployment: DeployToServer
@@ -20,6 +40,8 @@ jobs:
         deploy:
           steps:
           - checkout: self
+
+            # copy code to the server
           - task: CopyFiles@2
             inputs:
               SourceFolder: $(Build.SourcesDirectory)
@@ -27,50 +49,57 @@ jobs:
                 **/*
                 !.git/**/*
               TargetFolder: $(app.path)
+              # do not completely empty out existing files 
               CleanTargetFolder: false
+              # overwrite existing files
               OverWrite: true
-            displayName: 'Deploy app to server'
+            displayName: 'Copy app to server from the repo except for .git folder'
+
+            # remove node_modules & vendor folders and reset group write permission on cached views
           - script: |
               cd $(app.path)
               rm -fr node_modules
               rm -fr vendor
               find . -type f -not -path "./storage/framework/views/*" -exec chmod g+w {} \;
-            displayName: 'Update group permission'
+            displayName: 'Allow group write on ./storage/framework/views/*'
+
+            # read database password from the Key Vault
           - task: AzureKeyVault@2
             inputs:
               azureSubscription: 'UNM-Information-Technologies-Prod-IT-Apps-Keyvault-POC-laravel'
               keyVaultName: 'UNM-IT-Apps-Keyvault-POC'
               SecretsFilter: $(app.dbpassword)
               RunAsPreJob: true
-            displayName: 'Grab secrets from key vault'
+            displayName: 'Grab DB password from key vault'
+
+            # create .env file from variables and Key Vault secret value
           - script: |
               cd $(app.path)
-              mv .env.$(server.agentname) .env
+              mv .env.$(server.hostname) .env
               sed -i 's#{app.url}#$(app.url)#g' .env
               sed -i 's#{$(app.dbpassword)}#$(app.dbpassword)#g' .env
-            displayName: 'Populate .env file'
-# begin sonarqube -- wip
-#
-#          - task: SonarQubePrepare@5
-#            inputs:
-#              SonarQube: 'SonarQube'
-#              scannerMode: 'CLI'
-#              configMode: 'file'
-#          - task: SonarQubeAnalyze@5
-# end sonarqube -- wip
+            displayName: 'Create .env file'
+
+            # run composer update
           - script: |
               cd $(app.path)
               /usr/local/bin/composer update
             displayName: 'Run composer update'
+
+            # run npm install
           - task: Npm@1 
             inputs:
               command: 'install'
               workingDir: '$(app.path)'
             displayName: 'Run npm i'
+
+            # run the unit tests
           - script: |
               cd $(app.path)
               vendor/phpunit/phpunit/phpunit --debug --verbose
             displayName: 'Run unit tests'
+
+            # finally, check to make sure the application is online
           - script: |
               response=$(curl -s -o /dev/null -w "%{http_code}" $(app.url))
               if [ "$response" -ne 200 ]; then
@@ -79,4 +108,4 @@ jobs:
               else
                 echo "Application is running fine!"
               fi
-            displayName: "Check HTTP response"
+            displayName: 'Check HTTP response to make sure the application is up and running'
