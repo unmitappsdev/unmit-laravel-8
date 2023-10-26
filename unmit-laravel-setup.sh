@@ -32,7 +32,7 @@ git init
 composer require phpoffice/phpspreadsheet
 composer require elibyy/tcpdf-laravel
 composer require symfony/yaml
-composer require laravel/ui
+composer require laravel/ui:*
 ./artisan ui react
 composer require laracasts/utilities
 composer require subfission/cas

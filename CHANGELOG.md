@@ -14,6 +14,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.16] - 2023-10-26 MH
+### Changed
+- update unmit-laravel-setup.sh to sidestep error with laravel/ui installation
+
 ## [1.2.15] - 2023-10-19 MH
 ### Changed
 - update pipelines.yml to reflect the latest instruction for creating pipelines
