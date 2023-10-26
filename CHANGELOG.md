@@ -17,6 +17,7 @@ Types of changes
 ## [1.2.16] - 2023-10-26 MH
 ### Changed
 - update unmit-laravel-setup.sh to sidestep error with laravel/ui installation
+  - update URL for GitHub CDN
 
 ## [1.2.15] - 2023-10-19 MH
 ### Changed
