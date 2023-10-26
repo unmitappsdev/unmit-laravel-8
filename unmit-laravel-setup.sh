@@ -63,6 +63,19 @@ tar -xzvf resources.tar.gz
 rm resources.tar.gz
 cat cas.env >> .env
 rm cas.env
+# update .env to reflect UNM environment
+sed -i '/DB_DATABASE=laravel/a DB_SERVICE_NAME=BAND' .env
+sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=oracle/' .env
+sed -i 's/DB_HOST=127.0.0.1/DB_HOST=sband.unm.edu/' .env
+sed -i 's/DB_PORT=3306/DB_PORT=1523/' .env
+sed -i 's/DB_DATABASE=laravel/DB_DATABASE=BAND/' .env
+sed -i 's/DB_USERNAME=root/DB_USERNAME=EnterNetIDHere/' .env
+sed -i 's/DB_PASSWORD=/DB_PASSWORD=EnterPasswordHere/' .env
+sed -i 's/BROADCAST_DRIVER=log/BROADCAST_DRIVER=redis/' .env
+sed -i 's/CACHE_DRIVER=file/CACHE_DRIVER=redis/' .env
+sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=redis/' .env
+sed -i 's/SESSION_DRIVER=file/SESSION_DRIVER=redis/' .env
+
 # update composer.json
 wget --inet4-only -O ./setup-composer.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/setup-composer.php
 cp -p composer.json composer.json.dist

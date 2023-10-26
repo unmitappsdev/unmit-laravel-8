@@ -20,6 +20,9 @@ Types of changes
   - update URL for GitHub CDN
   - update cas.env to include PROXY_*, ASSET_URL, MIX_URL env vars
   - force --inet4-only on all of wget commands
+  - update .env to replace various services to use redis
+  - insert DB_SERVICE_NAME to .env
+- update config/oracle.php to include DB_SERVICE_NAME
 
 ## [1.2.15] - 2023-10-19 MH
 ### Changed
