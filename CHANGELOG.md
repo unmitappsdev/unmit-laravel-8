@@ -19,6 +19,7 @@ Types of changes
 - update unmit-laravel-setup.sh to sidestep error with laravel/ui installation
   - update URL for GitHub CDN
   - update cas.env to include PROXY_*, ASSET_URL, MIX_URL env vars
+  - force --inet4-only on all of wget commands
 
 ## [1.2.15] - 2023-10-19 MH
 ### Changed

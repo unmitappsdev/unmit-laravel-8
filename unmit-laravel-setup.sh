@@ -37,34 +37,34 @@ composer require laravel/ui:*
 composer require laracasts/utilities
 composer require subfission/cas
 ./artisan vendor:publish --tag=cas --force
-wget -O ./webpack.mix.js https://raw.githubusercontent.com/unmitappsdev/unmit/main/webpack.mix.js
-wget -O ./package.json https://raw.githubusercontent.com/unmitappsdev/unmit/main/package.json
-wget -O ./app/helpers.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/helpers.php
-wget -O ./app/OracleModel.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/OracleModel.php
-wget -O ./app/Http/Kernel.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Kernel.php
-wget -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/Controller.php
-wget -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/TextController.php
-wget -O ./routes/web.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/web.php
-wget -O ./routes/common.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/common.php
-wget -O ./config/app-extra.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/app-extra.php
-wget -O ./config/javascript.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/javascript.php
+wget --inet4-only -O ./webpack.mix.js https://raw.githubusercontent.com/unmitappsdev/unmit/main/webpack.mix.js
+wget --inet4-only -O ./package.json https://raw.githubusercontent.com/unmitappsdev/unmit/main/package.json
+wget --inet4-only -O ./app/helpers.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/helpers.php
+wget --inet4-only -O ./app/OracleModel.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/OracleModel.php
+wget --inet4-only -O ./app/Http/Kernel.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Kernel.php
+wget --inet4-only -O ./app/Http/Controllers/Controller.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/Controller.php
+wget --inet4-only -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/TextController.php
+wget --inet4-only -O ./routes/web.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/web.php
+wget --inet4-only -O ./routes/common.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/common.php
+wget --inet4-only -O ./config/app-extra.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/app-extra.php
+wget --inet4-only -O ./config/javascript.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/javascript.php
 rm -f ./config/auth.php
-wget -O ./config/auth.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/auth.php
+wget --inet4-only -O ./config/auth.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/auth.php
 mkdir -p app/Auth/Guards
-wget -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/CasGuard.php
+wget --inet4-only -O ./app/Auth/Guards/CasGuard.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/CasGuard.php
 mkdir -p app/Http/Controllers/Api
 rm -f ./app/Http/Controllers/Api/BaseController.php
-wget -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/Api/BaseController.php
+wget --inet4-only -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/Api/BaseController.php
 rm -f ./app/Providers/AuthServiceProvider.php
-wget -O ./app/Providers/AuthServiceProvider.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Providers/AuthServiceProvider.php
-wget -O ./cas.env https://raw.githubusercontent.com/unmitappsdev/unmit/main/cas.env
-wget -O ./resources.tar.gz https://raw.githubusercontent.com/unmitappsdev/unmit/main/resources.tar.gz
+wget --inet4-only -O ./app/Providers/AuthServiceProvider.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Providers/AuthServiceProvider.php
+wget --inet4-only -O ./cas.env https://raw.githubusercontent.com/unmitappsdev/unmit/main/cas.env
+wget --inet4-only -O ./resources.tar.gz https://raw.githubusercontent.com/unmitappsdev/unmit/main/resources.tar.gz
 tar -xzvf resources.tar.gz
 rm resources.tar.gz
 cat cas.env >> .env
 rm cas.env
 # update composer.json
-wget -O ./setup-composer.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/setup-composer.php
+wget --inet4-only -O ./setup-composer.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/setup-composer.php
 cp -p composer.json composer.json.dist
 php setup-composer.php
 (cat composer.json | python3 -m json.tool) > composer.tmp
@@ -74,7 +74,7 @@ rm -f setup-composer.php
 composer require yajra/laravel-oci8:^8
 ./artisan vendor:publish --tag=oracle --force
 rm -f ./config/oracle.php
-wget -O ./config/oracle.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/oracle.php
+wget --inet4-only -O ./config/oracle.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/oracle.php
 composer update
 composer dump-autoload
 rm -f resources/css/app.css
