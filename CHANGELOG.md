@@ -22,6 +22,7 @@ Types of changes
   - force --inet4-only on all of wget commands
   - update .env to replace various services to use redis
   - insert DB_SERVICE_NAME to .env
+- change CAS_DEBUG to false in cas.env file
 - update config/oracle.php to include DB_SERVICE_NAME
 
 ## [1.2.15] - 2023-10-19 MH
