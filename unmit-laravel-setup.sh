@@ -28,6 +28,7 @@ fi
 
 # git init
 git init
+
 # install Laravel packages
 composer require phpoffice/phpspreadsheet
 composer require elibyy/tcpdf-laravel
@@ -65,7 +66,7 @@ cat cas.env >> .env
 rm cas.env
 # update .env to reflect UNM environment
 sed -i '/DB_DATABASE=laravel/a DB_SERVICE_NAME=BAND' .env
-sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=oracle/' .env
+sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=banner/' .env
 sed -i 's/DB_HOST=127.0.0.1/DB_HOST=sband.unm.edu/' .env
 sed -i 's/DB_PORT=3306/DB_PORT=1523/' .env
 sed -i 's/DB_DATABASE=laravel/DB_DATABASE=BAND/' .env

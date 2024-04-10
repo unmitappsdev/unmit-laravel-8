@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+MH = [Michael Han](mailto:mhan1@unm.edu)
+
 Types of changes
 * Added for new features
 * Changed for changes in existing functionality
@@ -13,6 +15,14 @@ Types of changes
 * Security in case of vulnerabilities
 
 ## [Released]
+
+## [1.2.17] - 2024-04-09 MH
+### Changed
+- change the default DB_CONNECTION name from oracle to banner 
+
+### Added
+- add ODS database connection in config/oracle.php
+- add .env DB_ODS_* entries
 
 ## [1.2.16] - 2023-10-26 MH
 ### Changed

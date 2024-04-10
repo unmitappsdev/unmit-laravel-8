@@ -2,22 +2,12 @@
 
 This includes files and instructions necessary to setup a Laravel-based application development in UNM IT Apps environment.
 
-As of 2020-10-28, this is applicable for Laravel 8.x.
+This is for Laravel 8.x. For other versions of laravel, please look for another repository with the corresponding Laravel version.
 
 ## Installation
 
-### Prerequisite
+Please refer to the relevant UNM IT Applications Confluence documents for installation.
 
-Install runkit7
-
-```bash
-$ sudo pecl install channel://pecl.php.net/runkit7-4.0.0a2
-```
-
-### Using them in Laravel application project folder
-
-1. Copy *OracleModel.php* to ./app folder
-2. Run **composer dump-autoload**
 
 ## Usage
 
