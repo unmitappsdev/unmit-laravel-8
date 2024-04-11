@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.18] - 2024-04-11 MH
+### Changed
+- enable devuser group write access to ./storage/* for Pipelines
+
 ## [1.2.17] - 2024-04-09 MH
 ### Changed
 - change the default DB_CONNECTION name from oracle to banner 

@@ -28,6 +28,11 @@ trigger:
 #  variable1: 'value1'
 #  variable2: 'value2'
 
+# COMMENT OUT ANY BLOCKS AS NEEDED
+# If you don't have any secrets or passwords to store in KeyVault,
+# you can block out the KeyVault section below. If you don't have any
+# unit tests written, comment out the part where it runs unit tests and so on.
+
 jobs:
   - deployment: DeployToServer
     displayName: 'Deploy to server'
@@ -60,8 +65,9 @@ jobs:
               cd $(app.path)
               rm -fr node_modules
               rm -fr vendor
-              find . -type f -not -path "./storage/framework/views/*" -exec chmod g+w {} \;
-            displayName: 'Allow group write on ./storage/framework/views/*'
+              find . -type f -path "./storage/*" -exec chmod g+w {} \;
+              find . -type d -path "./storage/*" -exec chmod g+w {} \;
+            displayName: 'Allow group write on ./storage/*'
 
             # read database password from the Key Vault
           - task: AzureKeyVault@2
