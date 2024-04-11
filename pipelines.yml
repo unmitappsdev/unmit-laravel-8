@@ -36,10 +36,10 @@ trigger:
 jobs:
   - deployment: DeployToServer
     displayName: 'Deploy to server'
-    environment: $(server.environment)
+    environment: $(azure.environment)
     pool:
-      name: $(server.poolname)
-      demands: Agent.Name -equals $(server.agentname)
+      name: $(azure.poolname)
+      demands: Agent.Name -equals $(azure.agentname)
     strategy:
       runOnce:
         deploy:
@@ -72,8 +72,8 @@ jobs:
             # read database password from the Key Vault
           - task: AzureKeyVault@2
             inputs:
-              azureSubscription: 'UNM-Information-Technologies-Prod-IT-Apps-Keyvault-POC-laravel'
-              KeyVaultName: 'UNM-IT-Apps-Keyvault-POC'
+              azureSubscription: $(azure.subscription)
+              KeyVaultName: $(azure.keyvault)
               SecretsFilter: $(app.dbpassword)
               RunAsPreJob: true
             displayName: 'Grab DB password from key vault'
