@@ -73,7 +73,7 @@ jobs:
           - task: AzureKeyVault@2
             inputs:
               azureSubscription: 'UNM-Information-Technologies-Prod-IT-Apps-Keyvault-POC-laravel'
-              keyVaultName: 'UNM-IT-Apps-Keyvault-POC'
+              KeyVaultName: 'UNM-IT-Apps-Keyvault-POC'
               SecretsFilter: $(app.dbpassword)
               RunAsPreJob: true
             displayName: 'Grab DB password from key vault'
@@ -83,7 +83,7 @@ jobs:
               cd $(app.path)
               mv .env.$(server.hostname) .env
               sed -i 's#{app.url}#$(app.url)#g' .env
-              sed -i 's#{$(app.dbpassword)}#$(app.dbpassword)#g' .env
+              sed -i 's#{app.dbpassword}#$(yourKeyVaultSecretKeyNameHere)#g' .env
             displayName: 'Create .env file'
 
             # run composer update

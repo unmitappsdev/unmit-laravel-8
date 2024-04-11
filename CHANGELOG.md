@@ -19,6 +19,7 @@ Types of changes
 ## [1.2.18] - 2024-04-11 MH
 ### Changed
 - enable devuser group write access to ./storage/* for Pipelines
+- instruct developer to explicitly add the Key Vault key name to pipeline yml
 
 ## [1.2.17] - 2024-04-09 MH
 ### Changed
