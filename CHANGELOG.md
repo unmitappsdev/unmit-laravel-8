@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.19] - 2024-04-12 MH
+### Added
+- add env('APPWORX_FOLDER') & config('app-extra.appworx_folder') values
+
 ## [1.2.18] - 2024-04-11 MH
 ### Changed
 - enable devuser group write access to ./storage/* for Pipelines

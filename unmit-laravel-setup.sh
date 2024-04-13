@@ -58,12 +58,13 @@ rm -f ./app/Http/Controllers/Api/BaseController.php
 wget --inet4-only -O ./app/Http/Controllers/Api/BaseController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/Api/BaseController.php
 rm -f ./app/Providers/AuthServiceProvider.php
 wget --inet4-only -O ./app/Providers/AuthServiceProvider.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Providers/AuthServiceProvider.php
-wget --inet4-only -O ./cas.env https://raw.githubusercontent.com/unmitappsdev/unmit/main/cas.env
+wget --inet4-only -O ./extra.env https://raw.githubusercontent.com/unmitappsdev/unmit/main/extra.env
 wget --inet4-only -O ./resources.tar.gz https://raw.githubusercontent.com/unmitappsdev/unmit/main/resources.tar.gz
 tar -xzvf resources.tar.gz
 rm resources.tar.gz
-cat cas.env >> .env
-rm cas.env
+cat extra.env >> .env
+rm extra.env
+
 # update .env to reflect UNM environment
 sed -i '/DB_DATABASE=laravel/a DB_SERVICE_NAME=BAND' .env
 sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=banner/' .env

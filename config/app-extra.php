@@ -33,5 +33,7 @@ return [
 	'browser' => [
 		'default-page-title' => config('app.name','Base application'),
 		'main-title' => 'Home'
-	]
+	],
+
+	'appworx_folder' => env('APPWORX_FOLDER','/nfs/jobsub-devl'),
 ];
