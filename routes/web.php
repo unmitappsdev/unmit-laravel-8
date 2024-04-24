@@ -21,7 +21,10 @@ if (file_exists($rpath = base_path('routes').'/dev.php')) {
     });
 }
 
-Auth::routes();
+// We've defined the Auth routes manually for CAS,
+// so native Auth routes aren't used for now until
+// we can create more seamless integration for Azure AD later.
+// Auth::routes();
 
 Route::get('/', function () {
     return view('home');
@@ -39,8 +42,8 @@ Route::middleware(['cas.auth'])->group(function() {
 	})->name('main.logout');
 
 	Route::middleware(['can:admin'])->group(function() {
-		Route::get('admin/text','TextController@index')->name('admin.text');
-		Route::post('admin/text','TextController@submit')->name('admin.text-submit');
+		Route::get('admin/text',[App\Http\Controllers\TextController,'index'])->name('admin.text');
+		Route::post('admin/text',[App\Http\Controllers\TextController,'submit'])->name('admin.text-submit');
 	});
 });
 

@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.20] - 2024-04-24 MH
+### Fixed
+- update routes/web.php to properly refer to TextController in routes and comment out Auth::routes()
+
 ## [1.2.19] - 2024-04-12 MH
 ### Added
 - add env('APPWORX_FOLDER') & config('app-extra.appworx_folder') values
