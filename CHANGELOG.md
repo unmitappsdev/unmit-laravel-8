@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.21] - 2024-04-25 MH
+### Changed
+- change config/app-extra.php to config/unm.php
+
 ## [1.2.20] - 2024-04-24 MH
 ### Fixed
 - update routes/web.php to properly refer to TextController in routes and comment out Auth::routes()

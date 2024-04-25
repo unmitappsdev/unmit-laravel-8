@@ -47,7 +47,7 @@ wget --inet4-only -O ./app/Http/Controllers/Controller.php https://raw.githubuse
 wget --inet4-only -O ./app/Http/Controllers/TextController.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/app/Http/Controllers/TextController.php
 wget --inet4-only -O ./routes/web.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/web.php
 wget --inet4-only -O ./routes/common.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/routes/common.php
-wget --inet4-only -O ./config/app-extra.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/app-extra.php
+wget --inet4-only -O ./config/unm.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/unm.php
 wget --inet4-only -O ./config/javascript.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/javascript.php
 rm -f ./config/auth.php
 wget --inet4-only -O ./config/auth.php https://raw.githubusercontent.com/unmitappsdev/unmit/main/config/auth.php

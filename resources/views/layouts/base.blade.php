@@ -20,7 +20,7 @@ Layout page for using ReactJS components
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title',config('app-extra.browser.default-page-title')) | @yield('main-title',config('app-extra.browser.main-title'))</title>
+    <title>@yield('title',config('unm.browser.default-page-title')) | @yield('main-title',config('unm.browser.main-title'))</title>
 
     <meta name="description" content="UNM IT Application group is here to provide the application development needs of the university."/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
