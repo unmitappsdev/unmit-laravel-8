@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.22] - 2024-05-03 MH
+### Added
+- add wait.blade.php for a spinner page with a wait message
+
 ## [1.2.21] - 2024-04-25 MH
 ### Changed
 - change config/app-extra.php to config/unm.php

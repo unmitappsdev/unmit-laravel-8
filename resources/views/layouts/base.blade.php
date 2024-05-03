@@ -34,6 +34,7 @@ Layout page for using ReactJS components
     <link rel="manifest" href="{{ asset('mix-manifest.json') }}">
     <script src="//webcore.unm.edu/v2/js/unm-scripts.min.js" type="text/javascript"></script>
     <script src="{{ mix('js/site.js') }}" type="text/javascript"></script>
+	@yield('head-extra')
   </head>
 
   <body id="regions">
