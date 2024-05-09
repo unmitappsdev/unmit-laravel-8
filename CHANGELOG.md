@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.23] - 2024-05-08 MH
+### Added
+- add npm run dev to pipeline.yml
+
 ## [1.2.22] - 2024-05-03 MH
 ### Added
 - add wait.blade.php for a spinner page with a wait message

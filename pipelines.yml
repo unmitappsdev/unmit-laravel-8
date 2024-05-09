@@ -98,6 +98,13 @@ jobs:
               command: 'install'
               workingDir: '$(app.path)'
             displayName: 'Run npm i'
+              
+            # run npm run dev
+          - task: Npm@1 
+            inputs:
+              command: 'run dev'
+              workingDir: '$(app.path)'
+            displayName: 'Run npm run dev'
 
             # run the unit tests
           - script: |
