@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.24] - 2024-05-08 MH
+### Changed
+- revert back package.json for NodeJS 14.21.3
+
 ## [1.2.23] - 2024-05-08 MH
 ### Added
 - add npm run dev to pipeline.yml

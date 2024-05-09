@@ -102,7 +102,7 @@ jobs:
             # run npm run dev
           - script: |
               cd $(app.path)
-              /bin/npm run dev
+              /usr/bin/npm run dev
             displayName: 'Run npm run dev'
               
             # run the unit tests
