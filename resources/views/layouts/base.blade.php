@@ -201,7 +201,7 @@ Layout page for using ReactJS components
             {!! parseAnnouncement(__('text.home.announcement')) !!}
           @endif
           <ul class="breadcrumb hidden-xs" id="unm_breadcrumbs">
-            <li class="unm_home"><a href="/">Home</a></li>
+            <li class="unm_home"><a href="{{ url('/') }}">Home</a></li>
               @yield('breadcrumb')
             <div class="pull-right">
               @if (cas()->isAuthenticated())

@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.26] - 2024-05-10 MH
+### Changed
+- fix home link on breadcrumb in base template
+
 ## [1.2.25] - 2024-05-10 MH
 ### Changed
 - fix webpack.mix.js
