@@ -19,6 +19,7 @@ Types of changes
 ## [1.2.27] - 2024-05-16 MH
 ### Added
 - add termCodeText() to helpers.php
+- add get_tablename() to helpers.php
 
 ## [1.2.26] - 2024-05-10 MH
 ### Changed

@@ -2,13 +2,26 @@
 
 /*
  * @version
- * 1.0.1 2024-05-16 MH add termCodeText()
+ * 1.0.1 2024-05-16 MH add termCodeText(), get_tablename()
  * 1.0.0 2021-04-09 MH add get_basedomain()
  */
 
 if (!function_exists('get_basedomain')) {
 	function get_basedomain() {
 		return env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
+	}
+}
+
+if (!function_exists('get_tablename')) {
+	function get_tablename($modelname) {
+		$modelClass = 'App\Models\\'.$modelname;
+
+		$tableName = null;
+		if (class_exists($modelClass)) {
+			$tableName = (new $modelClass)->getTable();
+		}
+
+		return $tableName;
 	}
 }
 
