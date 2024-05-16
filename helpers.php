@@ -2,15 +2,17 @@
 
 /*
  * @version
+ * 1.0.1 2024-05-16 MH add termCodeText()
  * 1.0.0 2021-04-09 MH add get_basedomain()
  */
 
-if (!function_exists('get_name')) {
-
+if (!function_exists('get_basedomain')) {
 	function get_basedomain() {
 		return env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
 	}
+}
 
+if (!function_exists('get_name')) {
 	function get_name($identifier,$classname,$nametype) {
 		$version = app()->version();
 
@@ -58,6 +60,36 @@ if (!function_exists('desc')) {
     }
 }
 
+if (!function_exists('termCodeText')) {
+    function termCodeText($termcode) {
+		$year = substr($termcode,0,4);
+
+		if (!is_numeric($year)) {
+			return '';
+		}
+
+		$term = substr($termcode,4);
+
+		if (!is_numeric($term)) {
+			return '';
+		}
+
+		$term = intval($term);
+
+		$termText = 'Fall';
+
+		if ($term<20) {
+			$termText = 'Spring';
+		} elseif ($term<70) {
+			$termText = 'Summer';
+		} elseif ($term<90) {
+			$termText = 'Fall';
+		}
+
+		return $year.' '.$termText;
+    }
+}
+
 if (!function_exists('parseAnnouncement')) {
 	function parseAnnouncement($s) {
 		if ($i = strpos($s,"::")) {
@@ -88,10 +120,4 @@ HTML;
 
 		return $retstr;
     }
-}
-
-if (!function_exists('getBaseDomain')) {
-	function basedomain() {
-		return env('PROXY_URL') ? env('PROXY_URL'):request()->getSchemeAndHttpHost();
-	}
 }

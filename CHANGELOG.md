@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.27] - 2024-05-16 MH
+### Added
+- add termCodeText() to helpers.php
+
 ## [1.2.26] - 2024-05-10 MH
 ### Changed
 - fix home link on breadcrumb in base template
