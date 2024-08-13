@@ -197,7 +197,7 @@ Layout page for using ReactJS components
 
       <div id="breadcrumbs">
         <div class="container">
-          @if (\Lang::has('text.home.announcement'))
+		  @if ((\Lang::has('text.home.announcement')) && (session()->get('announcement-turned-off')!='true'))
             {!! parseAnnouncement(__('text.home.announcement')) !!}
           @endif
           <ul class="breadcrumb hidden-xs" id="unm_breadcrumbs">
@@ -339,6 +339,20 @@ Layout page for using ReactJS components
     </div>
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     @yield('scripts')
+	<script>
+		$(document).ready(function() {
+			$('#announceclose').click(function() {
+				$.ajax({
+					url: '{{ route('announcement-msg-off') }}',
+					type: 'GET',
+					success: function(response) {
+						console.log(response.status);
+					}
+				});
+			});
+			@yield('docreadyscript');
+		});
+	</script>
   </body>
 </html>
 <!-- -->

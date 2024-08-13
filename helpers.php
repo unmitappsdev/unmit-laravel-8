@@ -126,7 +126,7 @@ if (!function_exists('parseAnnouncement')) {
 		}
 		$retstr = <<<HTML
 <div class="alert alert-{$prefix} alert-dismissible" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<button id="announceclose" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<strong>Announcement: </strong>{$st}
 </div>
 HTML;

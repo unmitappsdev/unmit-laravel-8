@@ -16,6 +16,10 @@ Types of changes
 
 ## [Released]
 
+## [1.2.28] - 2024-08-13 MH
+### Added
+- once the announcement is closed it won't open again until logging in again
+
 ## [1.2.27] - 2024-05-16 MH
 ### Added
 - add termCodeText() to helpers.php

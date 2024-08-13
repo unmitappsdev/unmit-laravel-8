@@ -27,6 +27,9 @@ if (file_exists($rpath = base_path('routes').'/dev.php')) {
 // Auth::routes();
 
 Route::get('/', function () {
+	if (!cas()->isAuthenticated()) {
+		session()->forget('announcement-turned-off');
+	}
     return view('home');
 })->name('main.home');
 
@@ -46,6 +49,13 @@ Route::middleware(['cas.auth'])->group(function() {
 		Route::post('admin/text',[App\Http\Controllers\TextController,'submit'])->name('admin.text-submit');
 	});
 });
+
+Route::get('/announcement-msg-off',function() {
+	if ((session()->missing('announcement-turned-off')) || (session()->get('announcement-turned-off')!='true'))  {
+		session()->put('announcement-turned-off','true');
+		return response()->json(['status' => 'Announcement message is turned off']);
+	}
+})->name('announcement-msg-off');
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

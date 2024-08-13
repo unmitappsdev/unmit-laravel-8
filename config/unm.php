@@ -36,4 +36,6 @@ return [
 	],
 
 	'appworx_folder' => env('APPWORX_FOLDER','/nfs/jobsub-devl'),
+
+	// put application-specific environment/config variables below here
 ];
