@@ -47,7 +47,7 @@ export default function FormAutosuggest2({field,displayValue,value,onModify = v 
   const setFieldValues = v => {
     fieldValues = v;
   };
-  Array.from(document.querySelectorAll("input")).forEach(
+  Array.from(document.querySelectorAll("input,select")).forEach(
     input => (setFieldValues({...fieldValues,[input.id]: input.value}))
   );
 
