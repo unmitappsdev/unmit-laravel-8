@@ -43,10 +43,12 @@ export default function FormAdd({ formAttributes }) {
 
   formAttributes.fieldData.map((field) => {
     if (field.hasOwnProperty('default')) {
-      setTriggeredValue({...triggeredValue,[field.identifier]: field.default});
+      let defaultValue = (eval(field.default) !== undefined ? eval(field.default) : field.default);
+      setTriggeredValue({...triggeredValue,[field.identifier]: defaultValue});
     }
     if (field.hasOwnProperty('defaultKey')) {
-      setTriggeredValue({...triggeredValue,[field.identifier+'_key']: field.default});
+      let defaultKey = (eval(field.defaultKey) !== undefined ? eval(field.defaultKey) : field.defaultKey)
+      setTriggeredValue({...triggeredValue,[field.identifier+'_key']: defaultKey});
     }
   });
 
