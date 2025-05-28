@@ -6,6 +6,13 @@ This is for Laravel 8.x. For other versions of laravel, please look for another 
 
 ## Installation
 
+Pre-requisites:
+
+1. PHP 7.3 or higher
+2. PHP packages: BCMath, ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, oci8
+3. Redis
+4. Oracle Instant Client
+
 Please refer to the relevant UNM IT Applications Confluence documents for installation.
 
 

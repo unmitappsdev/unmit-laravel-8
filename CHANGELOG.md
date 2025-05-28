@@ -16,6 +16,14 @@ Types of changes
 
 ## [Released]
 
+## [1.3.0] - 2025-05-28 MH
+### Updated
+- pipelines.yml
+  - Check for the presence of README.md and CHANGELOG.md
+  - Check for a semver tag in last 5 commits
+    - this now forces the developer to make a changeset in no more than 5 commits
+  - Check for a matching semver tag in the commit history and in CHANGELOG.md
+
 ## [1.2.28] - 2024-08-13 MH
 ### Added
 - once the announcement is closed it won't open again until logging in again

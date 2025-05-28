@@ -3,6 +3,10 @@
 #
 # MUST DEFINE VARIABLES BEFORE RUNNING
 #
+# v1.2 - add the following steps for compliance checking on version tagging:
+#   - Check for the presence of README.md and CHANGELOG.md
+#   - Check for a semver tag in last 5 commits (this now forces the developer to make a changeset in no more than 5 commits)
+#   - Check for a matching semver tag in the commit history and in CHANGELOG.md
 # v1.1 - divide into stages 2023-10-19 MH
 # v1.0 - initial commit 2023-07-01 Michael Han <mhan1@unm.edu>
 
@@ -68,6 +72,65 @@ jobs:
               find . -type f -path "./storage/*" -exec chmod g+w {} \;
               find . -type d -path "./storage/*" -exec chmod g+w {} \;
             displayName: 'Allow group write on ./storage/*'
+
+            # check for the presence of README.md and CHANGELOG.md
+          - script: |
+              FOUND_README=$(find . -maxdepth 1 -type f -iname "readme.md")
+              FOUND_CHANGELOG=$(find . -maxdepth 1 -type f -iname "changelog.md")
+
+              if [[ -z "$FOUND_README" ]]; then
+                echo "!! README.md not found"
+                exit 1
+              fi
+
+              if [[ -z "$FOUND_CHANGELOG" ]]; then
+                echo "!! CHANGELOG.md not found"
+                exit 1
+              fi
+
+              echo "README.md and CHANGELOG.md found (case-insensitive match)"
+            displayName: 'Check for README.md and CHANGELOG.md'
+
+            # check for a semver tag in the last 5 commits
+          - script: |
+              # Get last 5 commit hashes
+              COMMITS=$(git rev-list HEAD -n 5)
+
+              # Check each for tags matching semver pattern
+              SEMVER_TAG_FOUND=0
+              for COMMIT in $COMMITS; do
+                TAGS=$(git tag --points-at "$COMMIT")
+                for TAG in $TAGS; do
+                  if [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                    echo "Found semver tag '$TAG' at commit $COMMIT !"
+                    SEMVER_TAG_FOUND=1
+                    break 2
+                  fi
+                done
+              done
+
+              if [[ "$SEMVER_TAG_FOUND" -eq 0 ]]; then
+                echo "!! No semver tag (vX.Y.Z) found in last 5 commits"
+                exit 1
+              fi
+            displayName: 'Check for semver tag in last 5 commits'
+
+            # get the latest version tag 
+          - script: |
+              # Extract the latest tag
+              TAG=$(git describe --tags --abbrev=0)
+              if [[ ! $TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                echo "!! No valid semver tag (vX.Y.Z) found!"
+                exit 1
+              fi
+
+              # Check for version in CHANGELOG.md
+              if ! grep -q "$TAG" CHANGELOG.md; then
+                echo "!! Semver tag $TAG not found in CHANGELOG.md"
+                exit 1
+              fi
+
+              echo "Found version $TAG and a matching entry in CHANGELOG.md !"
 
             # read database password from the Key Vault
           - task: AzureKeyVault@2
